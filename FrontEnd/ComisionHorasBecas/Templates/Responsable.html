@@ -1,0 +1,169 @@
+﻿<link href="css/estilos.css" rel="stylesheet" />
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #04025f;">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Evaluación</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navBar">
+        <form class="form-inline my-2 ml-auto mr-4">
+            <span data-toggle="tooltip" data-placement="bottom" title="Indicaciones de uso">
+                <span data-toggle="modal" data-target="#Indicaciones" style="color:white" class="fa fa-2x fa-question-circle" id="iconos"></span>
+            </span>
+            <span data-toggle="tooltip" data-placement="bottom" title="Información general">
+                <span data-toggle="modal" data-target="#Info" style="color:white" class="fa fa-2x fa-info-circle  mx-3" id="iconos"></span>
+            </span>
+            <span data-toggle="tooltip" data-placement="bottom" title="Salir">
+                <span data-toggle="modal" data-target="#" style="color:white" class="fa fa-2x fa-sign-out" id="iconos"></span>
+            </span>
+        </form>
+    </div>
+</nav>
+
+<!--Tabla para ver los estudiantes-->
+<div class="container-fluid justify-content-center" style="width:70%">
+    <table class="table table-striped">
+        <thead>
+            <tr><th colspan="5" style="text-align:center" id = "titulosTablas">Estudiantes a evaluar</th></tr>
+            <tr>
+                <th>Apellidos</th>
+                <th>Nombre</th>
+                <th colspan="3">Carné</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="estudiante in estudiantes">
+                <td>{{estudiante.Apellido1}} {{estudiante.Apellido2}}</td>
+                <td>{{estudiante.Nombre}}</td>
+                <td>{{estudiante.Carne}}</td>
+                <td>
+                    <span data-toggle="tooltip" data-placement="bottom" title="Evaluar estudiante">
+                        <i id="iconos" ng-click="abrirFormEvaluacion(estudiante)" class="fa fa-lg fa-address-card-o"></i>
+                    </span>
+                </td>
+                <td>
+                    <span data-toggle="tooltip" data-placement="bottom" title="Estudiante evaluado" style="color:forestgreen" class="fa fa-lg fa-check-circle" ng-show="estudiante.Id.Id != null"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--Modal para el formulario de evaluacion-->
+<div class="modal fade" id="EvaluacionModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" align="center">Evaluación de estudiante</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--Estudiante-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <label class="col-form-label">Estudiante:</label>
+                        <p class="col-form-label">{{estudiante.Apellido1}} {{estudiante.Apellido2}} {{estudiante.Nombre}}</p>
+                    </div>
+                </div>
+                <!--Carne-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <label class="col-form-label">Carné:</label>
+                        <p class="col-form-label">{{estudiante.Carne}}</p>
+                    </div>
+                </div>
+                <!--Horas asignadas-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <label class="col-form-label">Horas asignadas:</label>
+                        <p class="col-form-label">{{estudiante.HorasAsignadas}}</p>
+                    </div>
+                </div>
+                <!--Horas laboradas-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <label class="col-form-label">Horas laboradas:</label>
+                        <div class="col">
+                            <input ng-model="estudiante.Evaluacion.HorasLaboradas" type="number" step="0.1" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <!--Observaciones-->
+                <div class="form-group">
+                    <label>Observaciones:</label>
+                    <textarea ng-model="estudiante.Evaluacion.Observaciones" rows="5" class="form-control"></textarea>
+                </div>
+                <!--Lo recomienda-->
+                <div class="form-group">
+                    <div class="form-row">
+                        <label>¿Recomienda a este estudiante?:</label>
+                        <!-- Si recomienda -->
+                        <div class="col-auto">
+                            <div class=" form-check">
+                                <input ng-model="estudiante.Evaluacion.Recomendado" class="form-check-input" type="radio" name="recomienda" value=true>
+                                <label class="form-check-label" for="gridRadios1">Sí</label>
+                            </div>
+                        </div>
+                        <!-- No recomienda -->
+                        <div class="col-auto">
+                            <div class=" form-check">
+                                <input ng-model="estudiante.Evaluacion.Recomendado" class="form-check-input" type="radio" name="recomienda" value=false ng-checked="true">
+                                <label class="form-check-label">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="evaluarEstudiante()" ng-show="botonEvaluar">Envaluar</button>
+                <button type="button" class="btn btn-primary" ng-click="guardarCambiosEvaluacion()" ng-show="botonActualEval">Guardar cambios</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Modal informacion-->
+<div class="modal fade" id="Info" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" align="center">Información</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--Info-->
+                <p>Info</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Modal que hacer-->
+<div class="modal fade" id="Indicaciones" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" align="center">¿Qué hacer?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--Que hacer-->
+                <p>Info</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

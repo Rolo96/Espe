@@ -1,0 +1,116 @@
+﻿<link href="css/estilos.css" rel="stylesheet" />
+<ng-include src="scpUrlFormsModals"></ng-include>
+<div ng-controller="LoginEstController">
+    <!---------------------------------------------------------------- Menu horizontal --------------------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #04025f;">
+        <div class="navbar-header" style="color:white;">
+            <a class="navbar-brand">Horas beca</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navBar">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="btn btn-link" href="#!estPeriodos" id="periodosBtn">Periodos de recepción</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="btn btn-link dropdown-toggle" href="" id="misSoliDrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mis solicitudes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="misSoliDrop">
+                        <a href="#!estSolEnv" class="dropdown-item">Enviadas</a>
+                        <a class="dropdown-item" href="#!estSolGuard">Borradores</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="btn btn-link dropdown-toggle" href="" id="nuevaSoliDrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Nueva solicitud
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="nuevaSoliDrop">
+                        <a class="dropdown-item" href="" ng-repeat="beca in scpTiposBeca" ng-click="verFormularioSolicitud(0,'crear',beca.AbreviaturaBeca)">{{beca.Tipo}}</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 mr-4">
+                <span data-toggle="tooltip" data-placement="bottom" title="Indicaciones de uso"><span data-toggle="modal" data-target="#Indicaciones" style="color:white" class="fa fa-2x fa-question-circle" id="iconos"></span></span>
+                <span data-toggle="tooltip" data-placement="bottom" title="Información general"><span data-toggle="modal" data-target="#Info" style="color:white" class="fa fa-2x fa-info-circle  mx-3" id="iconos"></span></span>
+                <span data-toggle="tooltip" data-placement="bottom" title="Salir"><span data-toggle="modal" data-target="#" style="color:white" class="fa fa-2x fa-sign-out" id="iconos"></span></span>
+            </form>
+        </div>
+    </nav>
+</div>
+<!---------------------------------------------------------------- requesitos y beneficios --------------------------------------------------------->
+<div class="modal fade" id="InfoImportante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="exampleModalLabel">Beca tutor</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul ng-repeat=" beca in becas" ng-show="beca.id=='BT'">
+                    <li>
+                        Requisitos
+                        <ul>
+                            <li ng-repeat=" requi in beca.req"> {{requi}}</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Beneficios
+                        <ul>
+                            <li ng-repeat=" requi in beca.req"> {{requi}}</li>
+                        </ul>
+                    </li>
+                    <li ng-repeat="info in beca.info">
+                        {{info}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------Modal informacion de la pagina----------->
+<div class="modal fade" id="Info" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" align="center">Información</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--Info-->
+                <p>Info</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!---------------------Modal que hacer en la pagina------------------>
+<div class="modal fade" id="Indicaciones" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" align="center">¿Qué hacer?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!--Que hacer-->
+                <p>Info</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

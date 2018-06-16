@@ -1,0 +1,87 @@
+﻿<!--Se adhieren los diseños de las css-->
+<link href="css/estilos.css" rel="stylesheet" />
+<!--Se incluye el menu lateral de la vista administrador-->
+<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<ng-include src="scpUrlFormsModals"></ng-include>
+
+<div class="container-fluid" style="width:100%">
+    <div class="container-fluid justify-content-center" style="width:70%">
+
+        <div class="row justify-content-center my-4">
+            <form class="form-inline">
+                <label class="mr-sm-2" for="inlineSolicitudSelect">Tipo de beca</label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineSolicitudSelect">
+                    <option selected value="T">Todas</option>
+                    <option value="HE">Horas Estudiante</option>
+                    <option value="HA">Horas Asistente</option>
+                    <option value="TE">Tutoría Estudiantil</option>
+                    <option value="AE">Asistencia Especial</option>
+                </select>
+                <label class="mr-sm-2 m-4" for="inlineEstadoSelect">Estado</label>
+                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineEstadoSelect">
+                    <option selected value=0>Todos</option>
+                    <option value=1>Sin asignar</option>
+                    <option value=3>Pendientes</option>
+                    <option value=4>Aprobadas</option>
+                    <option value=5>Rechazadas</option>
+                </select>
+            </form>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr><th colspan="8" style="text-align:center">Solicitudes recibidas</th></tr>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Carrera</th>
+                    <th>Ponderado General</th>
+                    <th>Carné</th>
+                    <th>Cuenta Bancaria</th>
+                    <th>Tipo Beca</th>
+                    <th colspan="6">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="solicitud in solicitudesComision">
+                    <td>{{solicitud.Nombre}}</td>
+                    <td>{{solicitud.Apellido1}}</td>
+                    <td>{{solicitud.Apellido2}}</td>
+                    <td>{{solicitud.Carrera}}</td>
+                    <td>{{solicitud.PonderadoGeneral}}</td>
+                    <td>{{solicitud.Carne}}</td>
+                    <td>{{solicitud.NumeroCuenta}}</td>
+                    <td>{{solicitud.Tipo}}</td>
+                    <td>{{solicitud.Estado}}</td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Detalles">
+                            <i class=" fa fa-eye fa-lg" ng-click="verFormularioSolicitud(solicitud.Id,  'detallesComision', solicitud.Beca)" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Aprobar">
+                            <i class=" fa fa-thumbs-up fa-lg" ng-click="generarModalAprobar(solicitud.Id, solicitud.Carne)" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Rechazar">
+                            <i class=" fa fa-thumbs-down fa-lg" ng-click="generarModalRechazo('rechazar',solicitud.Id)" data-toggle="modal" data-target="#ModalRechazo" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Pendiente">
+                            <i class=" fa fa-clock-o fa-lg" ng-click="generarModalRechazo('pendiente',solicitud.Id)" data-toggle="modal" data-target="#ModalRechazo" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Historial del Estudiante">
+                            <i class=" fa fa-bars fa-lg" ng-click="generarModalHistorial(solicitud.Carne)" id="DetEditText"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+</div>

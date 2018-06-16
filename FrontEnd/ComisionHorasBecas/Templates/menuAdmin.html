@@ -1,0 +1,42 @@
+﻿<link href="css/estilos.css" rel="stylesheet" />
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #04025f;">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#/">Administración Horas beca</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navBar">
+        <ul class="nav navbar-nav mr-auto">
+
+            <li class="nav-item ">
+                <a class="btn btn-link linkNav" href="#!adminPeriodosRecepcion">Periodos de recepción</a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="btn btn-link linkNav" href="#!admin">Solicitudes recibidas</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle btn-link  linkNav" href="" id="aa" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reportes
+                </button>
+                <div class="dropdown-menu" aria-labelledby="aa">
+                    <a href="#!adminReportes" class="dropdown-item">Auditoria</a>
+                    <a href="#!reporteTec" class="dropdown-item">Sistema TEC</a>
+                    <a href="#!reporteTec" class="dropdown-item">Trabajo Social</a>
+                    <a href="#!reporteTec" class="dropdown-item">Certificación Horas</a>
+                </div>
+            </li>    
+            <li class="nav-item ">
+                <a class="btn btn-link linkNav" href="#!adminRegistrarUsuario">Registrar usuario</a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2">
+            <span data-toggle="tooltip" data-placement="bottom" title="Indicaciones de uso"><span data-toggle="modal" data-target="#" style="color:white" class="fa fa-2x fa-question-circle" id="iconos"></span></span>
+            <span data-toggle="tooltip" data-placement="bottom" title="Información general"><span data-toggle="modal" data-target="#" style="color:white" class="fa fa-2x fa-info-circle  mx-3" id="iconos"></span></span>
+            <span data-toggle="tooltip" data-placement="bottom" title="Salir"><span data-toggle="modal" data-target="#" style="color:white" class="fa fa-2x fa-sign-out" id="iconos"></span></span>
+        </form>
+    </div>
+</nav>

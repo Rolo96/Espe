@@ -1,0 +1,115 @@
+﻿.btnBeca {
+    margin: 10px;
+}
+
+#periodosBtn, #misSoliDrop, #nuevaSoliDrop {
+    color: white;
+}
+
+    #periodosBtn:hover, #misSoliDrop:hover, #nuevaSoliDrop:hover {
+        text-decoration: none;
+        color: cornflowerblue;
+    }
+
+    #periodosBtn:focus, #misSoliDrop:focus, #nuevaSoliDrop:focus {
+        text-decoration: none;
+    }
+
+    #periodosBtn:hover, #misSoliDrop:hover, #nuevaSoliDrop:hover {
+        color: cornflowerblue;
+    }
+
+
+.linkNav {
+    border: none;
+    color: ghostwhite;
+}
+
+    .linkNav:hover {
+        background-color: transparent;
+        text-decoration: underline;
+        color: white;
+    }
+
+    .linkNav:focus {
+        border-color: transparent;
+    }
+
+.modal {
+    overflow-y: auto;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.custom-file-label::after {
+    content: "";
+    padding: 0;
+    border-left: 0;
+}
+
+
+#ImaSelBtn1 {
+    position: relative;
+    overflow: hidden;
+}
+
+#ImaInp1, #ImaInp2, #ImaInp3, #ImaInp4 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#viewCedula, #viewPondeAnterior, #viewCreditosAnt, #viewCreditosTEC, #viewNotaCurso, #viewPondeGeneral, #viewCuenta {
+    width: 100%;
+    max-height: 2500px;
+}
+
+
+#DetEditText, #iconos, #estudNombre, #clonarDropD {
+    cursor: pointer;
+}
+
+#etiquetas {
+    background: #D8D8D8;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#titulosTablas {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#estudNombre:hover {
+    color: darkblue;
+    font-weight: bolder;
+}
+
+#linkInfo {
+    font-size: 100%;
+    color: red;
+    text-decoration: underline;
+}
+
+    #linkInfo:hover {
+        color: darkred;
+        cursor: pointer;
+    }
+
+#TituloAlertas {
+    color: white;
+}

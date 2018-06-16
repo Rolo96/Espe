@@ -1,0 +1,119 @@
+﻿<!--Se incluye el menu lateral de la vista administrador-->
+<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<ng-include src="scpUrlFormsModals"></ng-include>
+
+<div class="container-fluid" style="width:100%">
+    <div class="container-fluid justify-content-center" style="width:90%">
+        <div class="container" align="center" style="width:830px; margin-bottom:-35px; margin-top:50px">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-backdrop="false" data-target="#modalRegistrarUsuario" ng-click="verRoles()"> Registrar Usuario</button>
+        </div>
+        <table class="table table-striped my-5">
+            <thead>
+                <tr><th colspan="8" style="text-align:center">Usuarios registrados</th></tr>
+                <tr>
+                    <th>Primer Nombre</th>
+                    <th>Segundo Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Raul</td>
+                    <td> </td>
+                    <td>Arias</td>
+                    <td>Quesada</td>
+                    <td>aaaaa@aaa.com</td>
+                    <td>Responsable</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modalRegistrarUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Registrar usuario</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="botoncerrar2">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form method="post" name="UsuarioForm" ng-submit="submitForm()" novalidate>
+                                    <!--Correo-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Correo Electrónico
+                                        </label>
+                                        <input class="form-control" id="IdUsuario" placeholder="Correo" type="email" ng-model="usuario.Correo" value=" " required />
+                                    </div>
+                                    <!--Correo-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Contraseña
+                                        </label>
+                                        <input class="form-control" id="Contrasena" placeholder="Password" type="text" ng-model="usuario.Contrasena" required />
+                                    </div>
+                                    <!-- Nombre1-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Primer Nombre
+                                        </label>
+                                        <input class="form-control" id="NombreUsuario" placeholder="Primer Nombre" type="text" ng-model="usuario.Nombre1" required />
+                                    </div>
+                                    <!-- Nombre2-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Segundo Nombre
+                                        </label>
+                                        <input class="form-control" id="NombreUsuario2" placeholder="Segundo Nombre" type="text" ng-model="usuario.Nombre2" required />
+                                    </div>
+                                    <!-- Apellido1-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Primer apellido
+                                        </label>
+                                        <input class="form-control" id="Apellido1Usuario" placeholder="Primer apellido" type="text" ng-model="usuario.Apellido1" required />
+                                    </div>
+                                    <!-- Apellido2-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Segundo apellido
+                                        </label>
+                                        <input class="form-control" id="Apellido2Usuario" placeholder="Segundo apellido" type="text" ng-model="usuario.Apellido2" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <!--Carrera-->
+                                        <div class="form-row">
+                                            <label class="col-form-label col-form-label-sm">Rol:</label>
+                                            <div class="col-sm">
+                                                <select ng-model="usuario.Rol" required ng-options="rol.nombre for rol in scpRoles track by rol.id_rol"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#AlertaConf" ng-disabled="UsuarioForm.$invalid" ng-click="crearUsuario()">Crear</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

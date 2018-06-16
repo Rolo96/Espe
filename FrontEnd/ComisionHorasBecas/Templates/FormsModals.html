@@ -1,0 +1,762 @@
+﻿<!-- Formulario -->
+<div ng-controller="FormsModalsController">
+    <div class="modal fade" id="Formulario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="exampleModalLabel">{{scpTipoForm}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <!------------------------------------------------------Leer el Programa----------------------------------------------------------->
+                        <div class="form-group">
+                            <label>Antes de llenar el formulario es necesario que haya leído cuidadosamente el <a id="linkInfo" data-toggle="modal" data-target="#ProgramaAsistencia">Programa de Asistencias y Tutoría Estudiantil</a>.</label>
+                        </div>
+                        <!----------------------------------------------Cumplimiento de requisitos ----------------------------------------------->
+                        <div id="etiquetas">Cumplimiento de requisitos</div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <label class="col-form-label col-form-label-sm">¿Cumple con los requisitos descritos en el Programa:</label>
+                                <!-- si cumple requisitos -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.CumpleRequisitos" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="CumpleRequisitos" id="" value="true">
+                                        <label class="form-check-label col-form-label-sm">Sí</label>
+                                    </div>
+                                </div>
+                                <!-- No cumple requisitos -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.CumpleRequisitos" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="CumpleRequisitos" id="" value="false" ng-checked="true">
+                                        <label class="form-check-label col-form-label-sm">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----------------------------------------------DATOS DEL ESTUDIANTE ----------------------------------------------->
+                        <div id="etiquetas">Datos del Estudiante</div>
+
+                        <!-- Primer fila -->
+                        <div class="form-group">
+                            <!--Carrera-->
+                            <div class="form-row">
+                                <label class="col-form-label col-form-label-sm">Carrera:</label>
+                                <div class="col-sm">
+                                    <select ng-disabled="bloquearInputs" ng-model="CarreraId" ng-options="carrera.Nombre for carrera in scpCarreras track by carrera.Id"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Segunda fila -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <!-- Cedula -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Cédula:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.Cedula" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Carne -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Carné:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="carne" ng-disabled="banderas.scpCarne" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Telefono -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Teléfono:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.Telefono" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">ScreenShot cédula:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--Imagen Cedula-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1">
+                                                Seleccionar <input ng-disabled="bloquearInputs" type="file" id="ImaInp1" title=" " onchange="ProcesarImagen(this,'viewCedula','ImaTextCedula')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextCedula" readonly>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" ng-click="EliminarImagen('viewCedula','ImaTextCedula')" ng-disabled="boquearInputs" id="ImaEliBtn1">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewCedula' src="{{solicitud.imagenCedula}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Tercera fila -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <!-- Apellido1 -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Primer Apellido:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.Apellido1" ng-disabled="bloquearInputs" ng-init="solicitud.Apellido1 =''" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Apellido2 -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Segundo Apellido:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.Apellido2" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Nombre -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Nombre:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.Nombre" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cuarta fila -->
+                        <div class="form-group">
+                            <!--Correo-->
+                            <div class="form-row">
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Correo electrónico:</label>
+                                <div class="col-sm">
+                                    <input ng-model="solicitud.Email" ng-disabled="bloquearInputs" type="email" class="form-control form-control-sm" id="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quinta fila -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <!--Promedio anterior-->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Promedio ponderado del semestre anterior:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.PonderadoAnterior" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Promedio general-->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Promedio ponderado general:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.PonderadoGeneral" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">Screenshot promedio ponderado del semestre anterior:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--imagen ponderado anterior-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp2" title=" " onchange="ProcesarImagen(this,'viewPondeAnterior','ImaTextPondeAnterior')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextPondeAnterior" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewPondeAnterior','ImaTextPondeAnterior')" id="ImaEliBtn2">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewPondeAnterior' src="{{solicitud.imagenPromedioAnterior}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">ScreenShot promedio ponderado general:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--imagen ponderado general-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp3" title=" " onchange="ProcesarImagen(this,'viewPondeGeneral','ImaTextPondeGeneral')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextPondeGeneral" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewPondeGeneral','ImaTextPondeGeneral')" id="ImaEliBtn3">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewPondeGeneral' src="{{solicitud.imagenPromedioGeneral}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sexta fila -->
+                        <div class="form-group">
+                            <!--Creditos anterior-->
+                            <div class="form-row">
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Cantidad de créditos aprobados en el semestre anterior:</label>
+                                <div class="col-sm">
+                                    <input ng-model="solicitud.CreditosAprobadosAnterior" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Setima fila -->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <!--Anos Tec-->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Años de ser estudiante activo en el TEC:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.AnosActivoTec" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Creditos TEC-->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Créditos aprobados en el TEC:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.CreditosAprobadosTotal" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">Cantidad de créditos aprobados en el semestre anterior:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--imagen créditos aprobados en el semestre anterior-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp3" title=" " onchange="ProcesarImagen(this,'viewCreditosAnt','ImaTextCreditosAnt')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextCreditosAnt" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewCreditosAnt','ImaTextCreditosAnt')" id="ImaEliBtn3">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewCreditosAnt' src="{{solicitud.imagenCreditosAnterior}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">Cantidad de créditos aprobados en el TEC:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--imagen Cantidad de créditos aprobados en el TEC-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp3" title=" " onchange="ProcesarImagen(this,'viewCreditosTEC','ImaTextCreditosTEC')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextCreditosTEC" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewCreditosTEC','ImaTextCreditosTEC')" id="ImaEliBtn3">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewCreditosTEC' src="{{solicitud.imagenCreditosTec}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----------------------------------------------TIPOS DE BECA ----------------------------------------------->
+                        <div id="etiquetas" ng-show="banderas.scpTipoBeca">Tipo de Beca</div>
+
+                        <!-----------------------------BECA HATU--------------------------------->
+                        <div ng-show="banderas.scpHATU">
+                            <!-- Informacion AE -->
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <label for="colFormLabelSm" class=" col-form-label-sm">Antes de presentar el formulario debe contar con el aval del o la profesor(a).</label>
+                                </div>
+                                <div class="form-row">
+                                    <label class="col-form-label-sm">Información del curso a asistir:</label>
+                                </div>
+                                <div class="form-row">
+                                    <!-- Codigo -->
+                                    <div class="col">
+                                        <div class="form-row">
+                                            <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Código del curso:</label>
+                                            <div class="col-sm">
+                                                <input ng-model="solicitud.Codigo" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Nombre Curso -->
+                                    <div class="col">
+                                        <div class="form-row">
+                                            <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Nombre del curso:</label>
+                                            <div class="col-sm">
+                                                <input ng-model="solicitud.NombreCurso" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row my-1">
+                                    <!-- Nota Curso -->
+                                    <div class="col">
+                                        <div class="form-row">
+                                            <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Nota obtenida en el curso:</label>
+                                            <div class="col-sm">
+                                                <input ng-model="solicitud.Nota" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="colFormLabelSm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Profesor Curso -->
+                                    <div class="col" ng-show="banderas.scpHA">
+                                        <div class="form-row">
+                                            <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Nombre del profesor que asistirá:</label>
+                                            <div class="col-sm">
+                                                <input ng-model="solicitud.NombreResponsable" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="colFormLabelSm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-----------------------------BECA AE--------------------------------->
+                        <div ng-show="banderas.scpAE">
+                            <div class="form-group">
+                                <!-- Informacion AE -->
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Seleccione la cantidad de horas de su preferencia:</label>
+                            </div>
+                            <div class="form-row">
+                                <!-- 10 horas -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.Horas" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="horas" id="" value="1" ng-checked="true">
+                                        <label class="form-check-label col-form-label-sm">10 horas</label>
+                                    </div>
+                                </div>
+                                <!-- 20 horas -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.Horas" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="horas" id="" value="2">
+                                        <label class="form-check-label col-form-label-sm">20 horas</label>
+                                    </div>
+                                </div>
+                                <!-- Cualquiera -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.Horas" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="horas" id="" value="3">
+                                        <label class="form-check-label col-form-label-sm">Cualquiera</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="banderas.scpHATU">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">Screenshot nota del curso a asistir o tutorear:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--imagen Nota del curso-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp3" title=" " onchange="ProcesarImagen(this,'viewNotaCurso','ImaTextNotaCurso')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextNotaCurso" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewNotaCurso','ImaTextNotaCurso')" id="ImaEliBtn3">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewNotaCurso' src="{{solicitud.ScreenshotNota}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----------------------------------------------Información Bancaria ----------------------------------------------->
+                        <div id="etiquetas">Información Bancaria</div>
+                        <div class="form-group">
+                            <!-- Consideraciones cuenta -->
+                            <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Consideraciones sobre la cuenta bancaria:</label>
+                            <ul class="ml-4">
+                                <li><label class="col-form-label-sm">Debe estar a nombre del estudiante al que se le hará el nombramiento.</label></li>
+                                <li><label class="col-form-label-sm">Debe estar activa.</label></li>
+                                <li><label class="col-form-label-sm">Debe estar en colones.</label></li>
+                            </ul>
+                            <div class="form-row">
+                                <!-- Banco Nacional -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.IdBanco" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="Banco" id="" value="1" ng-checked="true">
+                                        <label class="form-check-label col-form-label-sm">Banco Nacional</label>
+                                    </div>
+                                </div>
+                                <!-- Banco Popular -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.IdBanco" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="Banco" id="" value="2">
+                                        <label class="form-check-label col-form-label-sm">Banco Popular</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Número de cuenta -->
+                            <div class="form-row">
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Número de cuenta:</label>
+                                <div class="col-sm">
+                                    <input ng-model="solicitud.NumeroCuenta" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label class="col-form-label col-form-label-sm">Screenshot cuenta bancaria:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <!--Imagen cuenta de banco-->
+                                    <div class="input-group" ng-show="!bloquearInputs">
+                                        <span class="input-group-btn">
+                                            <span class="btn btn-outline-success btn-sm" id="ImaSelBtn1" ng-disabled="bloquearInputs">
+                                                Seleccionar <input type="file" id="ImaInp4" title=" " onchange="ProcesarImagen(this,'viewCuenta','ImaTextCuenta')">
+                                            </span>
+                                        </span>
+                                        <div class="form-group mx-0 my-0">
+                                            <input type="text" class="form-control form-control-sm" id="ImaTextCuenta" readonly>
+                                        </div>
+                                        <button class="btn btn-outline-secondary btn-sm" ng-disabled="bloquearInputs" ng-click="EliminarImagen('viewCuenta','ImaTextCuenta')" id="ImaEliBtn4">Eliminar</button>
+                                    </div>
+                                    <!--Contenedor vista imagen-->
+                                    <div class="container-fluid w-75 my-1 mx-1">
+                                        <img id='viewCuenta' src="{{solicitud.imagenCuenta}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!----------------------------------------------Nombramiento en otras instancias ----------------------------------------------->
+                        <div id="etiquetas">Nombramiento en otras instancias</div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <label class="col-form-label col-form-label-sm">
+                                    ¿Ha realizado la solicitud de otro tipo de beca en otra Escuela, Área Académica o
+                                    Departamento del TEC (diferente al Área Académica Ingeniería en Computadores)?:
+                                </label>
+                                <!-- si otra beca -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.OtraBeca" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="OtraBeca" id="" value="true">
+                                        <label class="form-check-label col-form-label-sm">Sí</label>
+                                    </div>
+                                </div>
+                                <!-- No otra beca -->
+                                <div class="col">
+                                    <div class=" form-check">
+                                        <input ng-model="solicitud.OtraBeca" ng-disabled="bloquearInputs" class="form-check-input" type="radio" name="OtraBeca" id="" value="false" ng-checked="true">
+                                        <label class="form-check-label col-form-label-sm">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <!-- Cantidad de horas de otra beca -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Cantidad de horas:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.OtraHoras" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Depto, escuela, area acade de otra beca -->
+                            <div class="form-row mt-1">
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Departamento, escuela o área académica:</label>
+                                <div class="col-sm">
+                                    <input ng-model="solicitud.OtraEscuela" ng-disabled="bloquearInputs" type="text" class="form-control form-control-sm" id="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!----------------------------------------------Condición de matrícula-------------------------------------------------------->
+                        <div id="etiquetas">Condición de matrícula</div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <!-- Créditos que espera matricular -->
+                                <div class="col">
+                                    <div class="form-row">
+                                        <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Cantidad de créditos que espera matricular:</label>
+                                        <div class="col-sm">
+                                            <input ng-model="solicitud.CreditosSemestreActual" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Cantidad de cursos pendientes para graduarse:-->
+                            <div class="form-row mt-1">
+                                <label for="colFormLabelSm" class="col-form-label col-form-label-sm">Cantidad de cursos pendientes para graduarse:</label>
+                                <div class="col-sm">
+                                    <input ng-model="solicitud.CursosPendientes" ng-disabled="bloquearInputs" type="number" class="form-control form-control-sm" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" ng-show="banderas.scpBtnEstudiante" class="btn btn-primary" ng-click="crearSolicitud(0,TB,'borrador')">Guardar como borrador</button>
+                    <button type="button" ng-show="banderas.scpBtnEstudiante" class="btn btn-primary" data-toggle="modal" data-target="#AlertaConf" ng-click="crearSolicitud(1,TB,'enviar')">Enviar</button>
+                    <button type="button" ng-show="banderas.scpBtnEditarEst" class="btn btn-primary" data-toggle="modal" data-target="#AlertaConf" ng-click="prevEditarSolicitud(TB,solicitud.Id)">Editar</button>
+
+
+                    <button type="button" ng-show="banderas.scpBtnAdmin" data-dismiss="modal" class="btn btn-primary" ng-click="revisionSolicitud(solicitud.Id,1,'revisar')"
+                            data-toggle="modal" data-target="#AlertaConf">
+                        Revisada
+                    </button>
+                    <button type="button" ng-show="banderas.scpBtnAdmin" data-dismiss="modal" class="btn btn-primary" ng-click="generarModalRechazo('corregirErrores',solicitud.Id)"
+                            data-toggle="modal" data-target="#ModalRechazo">
+                        Solicitar Corregir Errores
+                    </button>
+
+                    <button type="button" ng-show="banderas.scpBtnComision" data-dismiss="modal" class="btn btn-primary" ng-click="generarModalAprobar(solicitud.Id, solicitud.Carne)">Aprobar</button>
+                    <button type="button" ng-show="banderas.scpBtnComision" data-dismiss="modal" class="btn btn-primary" ng-click="generarModalRechazo('rechazar',solicitud.Id)"
+                            data-toggle="modal" data-target="#ModalRechazo">
+                        Rechazar
+                    </button>
+                    <button type="button" ng-show="banderas.scpBtnComision" data-dismiss="modal" class="btn btn-primary" ng-click="generarModalRechazo('pendiente',solicitud.Id)"
+                            data-toggle="modal" data-target="#ModalRechazo">
+                        Marcar como Pendiente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!----------------------Modal Rechazo----------->
+    <div class="modal fade" id="ModalRechazo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{scpMensajeModalRechazo}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Observaciones:</label>
+                            <textarea class="form-control" id="message-text" ng-model="scpModalRechazoObservacion"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" ng-click="accionModalRechazo()" data-toggle="modal" data-target="#AlertaConf">{{scpBotonModalRechazo}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para Las Alertas-->
+    <div class="modal fade" id="AlertaConf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:darkgreen;">
+                    <div class="col justify-content-center">
+                        <h4 class="modal-title" id="TituloAlertas">Confirmar</h4>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size:100%;">{{scpMensajeAlertaConf}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="accionAlertaConf()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="AlertaEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:lightblue">
+                    <div class="container-fluid justify-content-center">
+                        <h4 class="modal-title" id="TituloAlertas">¡Atención!</h4>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>{{scpMensajeAlertaEstado}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalAprobar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aprobar Solicitud</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="mr-sm-2" for="inlineSolicitudProf">Encargado del estudiante</label>
+                            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineSolicitudProf" ng-model="scpModalAprobarEncargado">
+                                <option ng-repeat="encargado in scpEncargados"
+                                        value="{{encargado.correo_electronico}}">
+                                    {{encargado.primer_nombre}} {{encargado.primer_apellido}} {{encargado.segundo_apellido}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Horas a asignar:</label>
+                            <input type="number" class="form-control form-control-sm" id="" ng-model="scpModalAprobarHoras">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Observaciones:</label>
+                            <textarea class="form-control" id="message-text" ng-model="scpModalAprobarObservacion"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="accionModalAprobar()" data-toggle="modal" data-target="#AlertaConf">Aprobar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ModalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr><th colspan="8" style="text-align:center">Historial de observaciones del estudiante</th></tr>
+                            <tr>
+                                <th>Año</th>
+                                <th>Semestre</th>
+                                <th>Observaciones</th>
+                                <th>Tipo Beca</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="historia in historial">
+                                <td>{{historia.ano}}</td>
+                                <td>{{historia.semestre}}</td>
+                                <td>{{historia.observaciones}}</td>
+                                <td>{{historia.tipoBeca}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para alerta antes de llenar formulario (dice que debe leer el programa)-->
+    <div class="modal fade" id="AlertaLeerInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#0062cc">
+                    <div class="container-fluid justify-content-center">
+                        <h4 class="modal-title" id="TituloAlertas">Importante</h4>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" data-toggle="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Formulario">Lo he leído</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para Programa de Asistencias y Tutoría Estudiantil-->
+    <div class="modal fade" id="ProgramaAsistencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="container-fluid justify-content-center">
+                        <h4 class="modal-title">Programa de Asistencias y Tutoría Estudiantil</h4>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" data-toggle="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <object type="application/pdf" data="Archivos/Programa.pdf" width="100%" height="700px" style="height: 85vh;">No Support</object>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

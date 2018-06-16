@@ -1,0 +1,33 @@
+﻿<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<div class="row justify-content-center my-2">
+    <button type="button" ng-click="generarExcel()" class="btn btn-default m-4">
+        <span class="fa fa-download"></span> Descargar
+    </button>
+</div>
+<div class="container-fluid justify-content-center" style="width:95%">
+    <table class="table table-striped" id="reporte">
+        <thead>
+            <tr><th colspan="7" style="text-align:center">Reporte para Sistema TEC</th></tr>
+            <tr>
+                <th>Carné</th>
+                <th>Nombre</th>
+                <th>Horas asignadas</th>
+                <th>Beca</th>
+                <th>Cuenta bancaria</th>
+                <th>Banco</th>
+                <th>Responsable</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="estudiante in estudiantes">
+                <td>{{estudiante.Carne}}</td>
+                <td>{{estudiante.Nombre}} {{estudiante.Apellido1}} {{estudiante.Apellido2}}</td>
+                <td>{{estudiante.HorasAsignadas}}</td>
+                <td>{{estudiante.AbreviaturaBeca}}</td>
+                <td>{{estudiante.NumeroCuenta}}</td>
+                <td>{{estudiante.Banco}}</td>
+                <td>{{estudiante.NombreR}} {{estudiante.Apellido1R}} {{estudiante.Apellido2R}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
