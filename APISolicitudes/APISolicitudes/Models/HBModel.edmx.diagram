@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6ffd52c8dbb4736a54775af23490bb6" Name="Diagram1">
+        <EntityTypeShape EntityType="HorasBecaModel.BANCO" Width="1.5" PointX="6.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.BECA" Width="1.5" PointX="6.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.BECAAE" Width="1.5" PointX="11.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.BECAHATU" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.BECAXPERIODO" Width="1.5" PointX="11.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.CARRERA" Width="1.5" PointX="6.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.ESTADO" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.ESTADOSOLICITUD" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.estudiantes" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.EVALUACION" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.MENSAJE" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.MENSAJENUEVO" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.PERIODO" Width="1.5" PointX="9" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.RESPONSABLEXESTUDIANTE" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.rol" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.SEMESTRE" Width="1.5" PointX="6.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.sistema_informacion" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.SOLICITUD" Width="1.5" PointX="9" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.TRANSACCIONES" Width="1.5" PointX="14.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HorasBecaModel.usuario" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_BANCO" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_BECAXPERIODO_BECA" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_BECA" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_BECAAE_SOLICITUD" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_BECAHATU_SOLICITUD" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_BECAXPERIODO_PERIODO" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_CARRERA" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_MENSAJE_ESTADO" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_ESTADO" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_TRANSACCIONES_ESTADO" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_EVALUACION_IDESTUDIANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_ESTUDIANTE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_EVALUACION_IDRESPONSABLE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_EVALUACION_SOLICITUD" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_PERIODO_SEMESTRE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.rol_sistema_fkey" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_SOLICITUD_SEMESTRE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_TRANSACCIONES_SOLICITUD" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.FK_TRANSACCIONES_RESPONSABLE" ManuallyRouted="false" />
+        <AssociationConnector Association="HorasBecaModel.roles_por_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

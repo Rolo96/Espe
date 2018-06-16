@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HorasBecaModelStoreContainer" CdmEntityContainer="HorasBecaEntities">
+    <EntitySetMapping Name="BANCO">
+      <EntityTypeMapping TypeName="HorasBecaModel.BANCO">
+        <MappingFragment StoreEntitySet="BANCO">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BECA">
+      <EntityTypeMapping TypeName="HorasBecaModel.BECA">
+        <MappingFragment StoreEntitySet="BECA">
+          <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BECAAE">
+      <EntityTypeMapping TypeName="HorasBecaModel.BECAAE">
+        <MappingFragment StoreEntitySet="BECAAE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BECAHATU">
+      <EntityTypeMapping TypeName="HorasBecaModel.BECAHATU">
+        <MappingFragment StoreEntitySet="BECAHATU">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BECAXPERIODO">
+      <EntityTypeMapping TypeName="HorasBecaModel.BECAXPERIODO">
+        <MappingFragment StoreEntitySet="BECAXPERIODO">
+          <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+          <ScalarProperty Name="AbreviaturaBeca" ColumnName="AbreviaturaBeca" />
+          <ScalarProperty Name="Horas" ColumnName="Horas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CARRERA">
+      <EntityTypeMapping TypeName="HorasBecaModel.CARRERA">
+        <MappingFragment StoreEntitySet="CARRERA">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADO">
+      <EntityTypeMapping TypeName="HorasBecaModel.ESTADO">
+        <MappingFragment StoreEntitySet="ESTADO">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Estado1" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOSOLICITUD">
+      <EntityTypeMapping TypeName="HorasBecaModel.ESTADOSOLICITUD">
+        <MappingFragment StoreEntitySet="ESTADOSOLICITUD">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estudiantes">
+      <EntityTypeMapping TypeName="HorasBecaModel.estudiantes">
+        <MappingFragment StoreEntitySet="estudiantes">
+          <ScalarProperty Name="carne" ColumnName="carne" />
+          <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+          <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+          <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+          <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+          <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EVALUACION">
+      <EntityTypeMapping TypeName="HorasBecaModel.EVALUACION">
+        <MappingFragment StoreEntitySet="EVALUACION">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Recomendable" ColumnName="Recomendable" />
+          <ScalarProperty Name="HorasLaboradas" ColumnName="HorasLaboradas" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MENSAJE">
+      <EntityTypeMapping TypeName="HorasBecaModel.MENSAJE">
+        <MappingFragment StoreEntitySet="MENSAJE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmailOrigen" ColumnName="EmailOrigen" />
+          <ScalarProperty Name="EmailDestino" ColumnName="EmailDestino" />
+          <ScalarProperty Name="Tema" ColumnName="Tema" />
+          <ScalarProperty Name="Mensaje1" ColumnName="Mensaje" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MENSAJENUEVO">
+      <EntityTypeMapping TypeName="HorasBecaModel.MENSAJENUEVO">
+        <MappingFragment StoreEntitySet="MENSAJENUEVO">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmailOrigen" ColumnName="EmailOrigen" />
+          <ScalarProperty Name="EmailDestino" ColumnName="EmailDestino" />
+          <ScalarProperty Name="Tema" ColumnName="Tema" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Intentos" ColumnName="Intentos" />
+          <ScalarProperty Name="Prioridad" ColumnName="Prioridad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PERIODO">
+      <EntityTypeMapping TypeName="HorasBecaModel.PERIODO">
+        <MappingFragment StoreEntitySet="PERIODO">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FechaApertura" ColumnName="FechaApertura" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="IdAdministrador" ColumnName="IdAdministrador" />
+          <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESPONSABLEXESTUDIANTE">
+      <EntityTypeMapping TypeName="HorasBecaModel.RESPONSABLEXESTUDIANTE">
+        <MappingFragment StoreEntitySet="RESPONSABLEXESTUDIANTE">
+          <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+          <ScalarProperty Name="IdEstudiante" ColumnName="IdEstudiante" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="HorasBecaModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="sistema" ColumnName="sistema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SEMESTRE">
+      <EntityTypeMapping TypeName="HorasBecaModel.SEMESTRE">
+        <MappingFragment StoreEntitySet="SEMESTRE">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Semestre1" ColumnName="Semestre" />
+          <ScalarProperty Name="Ano" ColumnName="Ano" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaCierre" ColumnName="FechaCierre" />
+          <ScalarProperty Name="FechaTrabajoSocial" ColumnName="FechaTrabajoSocial" />
+          <ScalarProperty Name="FechaInicioEvaluacion" ColumnName="FechaInicioEvaluacion" />
+          <ScalarProperty Name="FechaCierreEvaluacion" ColumnName="FechaCierreEvaluacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sistema_informacion">
+      <EntityTypeMapping TypeName="HorasBecaModel.sistema_informacion">
+        <MappingFragment StoreEntitySet="sistema_informacion">
+          <ScalarProperty Name="id_sistema" ColumnName="id_sistema" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SOLICITUD">
+      <EntityTypeMapping TypeName="HorasBecaModel.SOLICITUD">
+        <MappingFragment StoreEntitySet="SOLICITUD">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="Carne" ColumnName="Carne" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido1" ColumnName="Apellido1" />
+          <ScalarProperty Name="Apellido2" ColumnName="Apellido2" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="FechaAlmacenamiento" ColumnName="FechaAlmacenamiento" />
+          <ScalarProperty Name="HorasAsignadas" ColumnName="HorasAsignadas" />
+          <ScalarProperty Name="CumpleRequisitos" ColumnName="CumpleRequisitos" />
+          <ScalarProperty Name="OtraBeca" ColumnName="OtraBeca" />
+          <ScalarProperty Name="OtraEscuela" ColumnName="OtraEscuela" />
+          <ScalarProperty Name="OtraHoras" ColumnName="OtraHoras" />
+          <ScalarProperty Name="PonderadoAnterior" ColumnName="PonderadoAnterior" />
+          <ScalarProperty Name="PonderadoGeneral" ColumnName="PonderadoGeneral" />
+          <ScalarProperty Name="CreditosAprobadosAnterior" ColumnName="CreditosAprobadosAnterior" />
+          <ScalarProperty Name="CreditosAprobadosTotal" ColumnName="CreditosAprobadosTotal" />
+          <ScalarProperty Name="CreditosSemestreActual" ColumnName="CreditosSemestreActual" />
+          <ScalarProperty Name="CursosPendientes" ColumnName="CursosPendientes" />
+          <ScalarProperty Name="AnosActivoTec" ColumnName="AnosActivoTec" />
+          <ScalarProperty Name="NumeroCuenta" ColumnName="NumeroCuenta" />
+          <ScalarProperty Name="ScreenShotCedula" ColumnName="ScreenShotCedula" />
+          <ScalarProperty Name="ScreenShotPonderadoAnterior" ColumnName="ScreenShotPonderadoAnterior" />
+          <ScalarProperty Name="ScreenShotPonderadoGeneral" ColumnName="ScreenShotPonderadoGeneral" />
+          <ScalarProperty Name="ScreenShotCreditosAprobadosAnterior" ColumnName="ScreenShotCreditosAprobadosAnterior" />
+          <ScalarProperty Name="ScreenShotCreditosAprobadosTotal" ColumnName="ScreenShotCreditosAprobadosTotal" />
+          <ScalarProperty Name="ScreenShotCuentaBanco" ColumnName="ScreenShotCuentaBanco" />
+          <ScalarProperty Name="ObservacionesEvaluación" ColumnName="ObservacionesEvaluación" />
+          <ScalarProperty Name="IdSemestre" ColumnName="IdSemestre" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+          <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+          <ScalarProperty Name="AbreviaturaBeca" ColumnName="AbreviaturaBeca" />
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TRANSACCIONES">
+      <EntityTypeMapping TypeName="HorasBecaModel.TRANSACCIONES">
+        <MappingFragment StoreEntitySet="TRANSACCIONES">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+          <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="HorasBecaModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+          <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
+          <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+          <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+          <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+          <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="roles_por_usuario" TypeName="HorasBecaModel.roles_por_usuario" StoreEntitySet="roles_por_usuario">
+      <EndProperty Name="usuario">
+        <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+      </EndProperty>
+      <EndProperty Name="rol">
+        <ScalarProperty Name="id_rol" ColumnName="rol" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="insertarSemestre" FunctionName="HorasBecaModel.Store.INSERTARSEMESTRE" />
+    <FunctionImportMapping FunctionImportName="editarSemestre" FunctionName="HorasBecaModel.Store.EDITARSEMESTRE" />
+    <FunctionImportMapping FunctionImportName="insertarPeriodo" FunctionName="HorasBecaModel.Store.INSERTARPERIODO" />
+  </EntityContainerMapping>
+</Mapping>

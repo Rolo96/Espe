@@ -1,0 +1,946 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HorasBecaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BANCO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BECA">
+    <Key>
+      <PropertyRef Name="Abreviatura" />
+    </Key>
+    <Property Name="Abreviatura" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BECAAE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Horas" Type="int" />
+  </EntityType>
+  <EntityType Name="BECAHATU">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="10" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Nota" Type="int" />
+    <Property Name="NombreResponsable" Type="varchar" MaxLength="50" />
+    <Property Name="ScreenShotNota" Type="image" />
+  </EntityType>
+  <EntityType Name="BECAXPERIODO">
+    <Key>
+      <PropertyRef Name="IdPeriodo" />
+      <PropertyRef Name="AbreviaturaBeca" />
+    </Key>
+    <Property Name="IdPeriodo" Type="int" Nullable="false" />
+    <Property Name="AbreviaturaBeca" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="Horas" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CARRERA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADOSOLICITUD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="estudiantes">
+    <Key>
+      <PropertyRef Name="carne" />
+    </Key>
+    <Property Name="carne" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="correo_electronico" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="primer_nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="segundo_nombre" Type="varchar" MaxLength="20" />
+    <Property Name="primer_apellido" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="segundo_apellido" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EVALUACION">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Observacion" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Recomendable" Type="bit" Nullable="false" />
+    <Property Name="HorasLaboradas" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="IdEstudiante" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="IdResponsable" Type="int" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MENSAJE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmailOrigen" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailDestino" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tema" Type="varchar" MaxLength="50" />
+    <Property Name="Mensaje" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Estado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MENSAJENUEVO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailOrigen" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmailDestino" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tema" Type="varchar" MaxLength="50" />
+    <Property Name="Mensaje" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Intentos" Type="int" Nullable="false" />
+    <Property Name="Prioridad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERIODO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaApertura" Type="datetime" Nullable="false" />
+    <Property Name="FechaCierre" Type="datetime" Nullable="false" />
+    <Property Name="IdAdministrador" Type="int" Nullable="false" />
+    <Property Name="IdSemestre" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RESPONSABLEXESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdResponsable" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdResponsable" Type="int" Nullable="false" />
+    <Property Name="IdEstudiante" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sistema" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="roles_por_usuario">
+    <Key>
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="rol" />
+    </Key>
+    <Property Name="usuario" Type="int" Nullable="false" />
+    <Property Name="rol" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SEMESTRE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Semestre" Type="int" Nullable="false" />
+    <Property Name="Ano" Type="int" Nullable="false" />
+    <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+    <Property Name="FechaCierre" Type="datetime" Nullable="false" />
+    <Property Name="FechaTrabajoSocial" Type="datetime" />
+    <Property Name="FechaInicioEvaluacion" Type="datetime" />
+    <Property Name="FechaCierreEvaluacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sistema_informacion">
+    <Key>
+      <PropertyRef Name="id_sistema" />
+    </Key>
+    <Property Name="id_sistema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SOLICITUD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cedula" Type="int" />
+    <Property Name="Carne" Type="varchar" MaxLength="11" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido1" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido2" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="FechaAlmacenamiento" Type="datetime" />
+    <Property Name="HorasAsignadas" Type="int" />
+    <Property Name="CumpleRequisitos" Type="bit" />
+    <Property Name="OtraBeca" Type="bit" />
+    <Property Name="OtraEscuela" Type="varchar" MaxLength="50" />
+    <Property Name="OtraHoras" Type="int" />
+    <Property Name="PonderadoAnterior" Type="int" />
+    <Property Name="PonderadoGeneral" Type="int" />
+    <Property Name="CreditosAprobadosAnterior" Type="int" />
+    <Property Name="CreditosAprobadosTotal" Type="int" />
+    <Property Name="CreditosSemestreActual" Type="int" />
+    <Property Name="CursosPendientes" Type="int" />
+    <Property Name="AnosActivoTec" Type="int" />
+    <Property Name="NumeroCuenta" Type="int" />
+    <Property Name="ScreenShotCedula" Type="image" />
+    <Property Name="ScreenShotPonderadoAnterior" Type="image" />
+    <Property Name="ScreenShotPonderadoGeneral" Type="image" />
+    <Property Name="ScreenShotCreditosAprobadosAnterior" Type="image" />
+    <Property Name="ScreenShotCreditosAprobadosTotal" Type="image" />
+    <Property Name="ScreenShotCuentaBanco" Type="image" />
+    <Property Name="ObservacionesEvaluación" Type="varchar" MaxLength="150" />
+    <Property Name="IdSemestre" Type="int" Nullable="false" />
+    <Property Name="IdEstado" Type="int" Nullable="false" />
+    <Property Name="IdBanco" Type="int" Nullable="false" />
+    <Property Name="AbreviaturaBeca" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="IdCarrera" Type="int" />
+  </EntityType>
+  <EntityType Name="TRANSACCIONES">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdResponsable" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="IdSolicitud" Type="int" Nullable="false" />
+    <Property Name="IdEstado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cedula" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="correo_electronico" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="contrasenna" Type="varchar(max)" Nullable="false" />
+    <Property Name="primer_nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="segundo_nombre" Type="varchar" MaxLength="20" />
+    <Property Name="primer_apellido" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="segundo_apellido" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="email_rol_p_usario_fkey">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="roles_por_usuario" Type="Self.roles_por_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="roles_por_usuario">
+        <PropertyRef Name="usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAAE_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="BECAAE" Type="Self.BECAAE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAAE">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAHATU_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="BECAHATU" Type="Self.BECAHATU" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAHATU">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAXPERIODO_BECA">
+    <End Role="BECA" Type="Self.BECA" Multiplicity="1" />
+    <End Role="BECAXPERIODO" Type="Self.BECAXPERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BECA">
+        <PropertyRef Name="Abreviatura" />
+      </Principal>
+      <Dependent Role="BECAXPERIODO">
+        <PropertyRef Name="AbreviaturaBeca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAXPERIODO_PERIODO">
+    <End Role="PERIODO" Type="Self.PERIODO" Multiplicity="1" />
+    <End Role="BECAXPERIODO" Type="Self.BECAXPERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAXPERIODO">
+        <PropertyRef Name="IdPeriodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_IDESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_IDRESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MENSAJE_ESTADO">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERIODO_SEMESTRE">
+    <End Role="SEMESTRE" Type="Self.SEMESTRE" Multiplicity="1" />
+    <End Role="PERIODO" Type="Self.PERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEMESTRE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PERIODO">
+        <PropertyRef Name="IdSemestre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_BANCO">
+    <End Role="BANCO" Type="Self.BANCO" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BANCO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdBanco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_BECA">
+    <End Role="BECA" Type="Self.BECA" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BECA">
+        <PropertyRef Name="Abreviatura" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="AbreviaturaBeca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_CARRERA">
+    <End Role="CARRERA" Type="Self.CARRERA" Multiplicity="0..1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARRERA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdCarrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_ESTADO">
+    <End Role="ESTADOSOLICITUD" Type="Self.ESTADOSOLICITUD" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_ESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="0..1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="Carne" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_SEMESTRE">
+    <End Role="SEMESTRE" Type="Self.SEMESTRE" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEMESTRE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdSemestre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_ESTADO">
+    <End Role="ESTADOSOLICITUD" Type="Self.ESTADOSOLICITUD" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_RESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rol_rol_p_usario_fkey">
+    <End Role="rol" Type="Self.rol" Multiplicity="1" />
+    <End Role="roles_por_usuario" Type="Self.roles_por_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="roles_por_usuario">
+        <PropertyRef Name="rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rol_sistema_fkey">
+    <End Role="sistema_informacion" Type="Self.sistema_informacion" Multiplicity="1" />
+    <End Role="rol" Type="Self.rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sistema_informacion">
+        <PropertyRef Name="id_sistema" />
+      </Principal>
+      <Dependent Role="rol">
+        <PropertyRef Name="sistema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="APROBARSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+    <Parameter Name="IdEstudiante" Type="varchar" Mode="In" />
+    <Parameter Name="IdResponsable" Type="int" Mode="In" />
+    <Parameter Name="Observacion" Type="varchar" Mode="In" />
+    <Parameter Name="HorasAsignadas" Type="int" Mode="In" />
+    <Parameter Name="IdEstado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CAMBIARCONTRASENNA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="contrasenna" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="CAMBIARESTADOSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CAMBIARIDESTADOSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="IdEstado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="CANCELARSOLICITUDREVISADA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="Observacion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DUPLICARSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="EDITARPERIODO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="FechaApertura" Type="datetime" Mode="In" />
+    <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+    <Parameter Name="becas" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="EDITARSEMESTRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="FechaInicioEvaluacion" Type="datetime" Mode="In" />
+    <Parameter Name="FechaCierreEvaluacion" Type="datetime" Mode="In" />
+    <Parameter Name="FechaTrabajoSocial" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="EDITARSOLICITUDAE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Horas" Type="int" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EDITARSOLICITUDHATU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotNota" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="NombreCurso" Type="varchar" Mode="In" />
+    <Parameter Name="Nota" Type="int" Mode="In" />
+    <Parameter Name="NombreResponsable" Type="varchar" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EDITARSOLICITUDHE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ENVIARSOLICITUDGUARDADA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="EVALUARASISTENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdEstudiante" Type="varchar" Mode="In" />
+    <Parameter Name="IdResponsable" Type="int" Mode="In" />
+    <Parameter Name="Observacion" Type="varchar" Mode="In" />
+    <Parameter Name="Recomendable" Type="bit" Mode="In" />
+    <Parameter Name="HorasLaboradas" Type="int" Mode="In" />
+    <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="EVALUARSOLICITUDCOMENTADA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="Observacion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="INSERTARMENSAJENUEVO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmailOrigen" Type="varchar" Mode="In" />
+    <Parameter Name="EmailDestino" Type="varchar" Mode="In" />
+    <Parameter Name="Tema" Type="varchar" Mode="In" />
+    <Parameter Name="Mensaje" Type="varchar" Mode="In" />
+    <Parameter Name="Intentos" Type="int" Mode="In" />
+    <Parameter Name="Prioridad" Type="int" Mode="In" />
+  </Function>
+  <Function Name="INSERTARPERIODO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FechaApertura" Type="datetime" Mode="In" />
+    <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+    <Parameter Name="IdAdministrador" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="becas" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="INSERTARSEMESTRE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Semestre" Type="int" Mode="In" />
+    <Parameter Name="Ano" Type="int" Mode="In" />
+    <Parameter Name="FechaApertura" Type="datetime" Mode="In" />
+    <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="INSERTARSOLICITUDAE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
+    <Parameter Name="Horas" Type="int" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="INSERTARSOLICITUDHATU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotNota" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
+    <Parameter Name="Codigo" Type="varchar" Mode="In" />
+    <Parameter Name="NombreCurso" Type="varchar" Mode="In" />
+    <Parameter Name="Nota" Type="int" Mode="In" />
+    <Parameter Name="NombreResponsable" Type="varchar" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="INSERTARSOLICITUDHE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="int" Mode="In" />
+    <Parameter Name="Carne" Type="varchar" Mode="In" />
+    <Parameter Name="Nombre" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido1" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido2" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+    <Parameter Name="FechaAlmacenamiento" Type="datetime" Mode="In" />
+    <Parameter Name="CumpleRequisitos" Type="bit" Mode="In" />
+    <Parameter Name="OtraBeca" Type="bit" Mode="In" />
+    <Parameter Name="OtraEscuela" Type="varchar" Mode="In" />
+    <Parameter Name="OtraHoras" Type="int" Mode="In" />
+    <Parameter Name="PonderadoAnterior" Type="int" Mode="In" />
+    <Parameter Name="PonderadoGeneral" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosAnterior" Type="int" Mode="In" />
+    <Parameter Name="CreditosAprobadosTotal" Type="int" Mode="In" />
+    <Parameter Name="CreditosSemestreActual" Type="int" Mode="In" />
+    <Parameter Name="CursosPendientes" Type="int" Mode="In" />
+    <Parameter Name="AnosActivoTec" Type="int" Mode="In" />
+    <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+    <Parameter Name="ScreenShotCedula" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotPonderadoGeneral" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
+    <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+    <Parameter Name="IdBanco" Type="int" Mode="In" />
+    <Parameter Name="IdSemestre" Type="int" Mode="In" />
+    <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
+    <Parameter Name="Carrera" Type="int" Mode="In" />
+  </Function>
+  <Function Name="INSERTARTRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdResponsable" Type="int" Mode="In" />
+    <Parameter Name="Fecha" Type="datetime" Mode="In" />
+    <Parameter Name="IdSolicitud" Type="int" Mode="In" />
+    <Parameter Name="IdEstado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="MOVERMENSAJE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Estado" Type="int" Mode="In" />
+  </Function>
+  <Function Name="OBTENERMESAJESNUEVOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="REGISTRARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cedula" Type="varchar" Mode="In" />
+    <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
+    <Parameter Name="contrasenna" Type="varchar(max)" Mode="In" />
+    <Parameter Name="primer_nombre" Type="varchar" Mode="In" />
+    <Parameter Name="segundo_nombre" Type="varchar" Mode="In" />
+    <Parameter Name="primer_apellido" Type="varchar" Mode="In" />
+    <Parameter Name="segundo_apellido" Type="varchar" Mode="In" />
+    <Parameter Name="rol" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="HorasBecaModelStoreContainer">
+    <EntitySet Name="BANCO" EntityType="Self.BANCO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BECA" EntityType="Self.BECA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BECAAE" EntityType="Self.BECAAE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BECAHATU" EntityType="Self.BECAHATU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BECAXPERIODO" EntityType="Self.BECAXPERIODO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CARRERA" EntityType="Self.CARRERA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTADOSOLICITUD" EntityType="Self.ESTADOSOLICITUD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estudiantes" EntityType="Self.estudiantes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EVALUACION" EntityType="Self.EVALUACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MENSAJENUEVO" EntityType="Self.MENSAJENUEVO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERIODO" EntityType="Self.PERIODO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RESPONSABLEXESTUDIANTE" EntityType="Self.RESPONSABLEXESTUDIANTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="roles_por_usuario" EntityType="Self.roles_por_usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SEMESTRE" EntityType="Self.SEMESTRE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sistema_informacion" EntityType="Self.sistema_informacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TRANSACCIONES" EntityType="Self.TRANSACCIONES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="email_rol_p_usario_fkey" Association="Self.email_rol_p_usario_fkey">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="roles_por_usuario" EntitySet="roles_por_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAAE_SOLICITUD" Association="Self.FK_BECAAE_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="BECAAE" EntitySet="BECAAE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAHATU_SOLICITUD" Association="Self.FK_BECAHATU_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="BECAHATU" EntitySet="BECAHATU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAXPERIODO_BECA" Association="Self.FK_BECAXPERIODO_BECA">
+      <End Role="BECA" EntitySet="BECA" />
+      <End Role="BECAXPERIODO" EntitySet="BECAXPERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAXPERIODO_PERIODO" Association="Self.FK_BECAXPERIODO_PERIODO">
+      <End Role="PERIODO" EntitySet="PERIODO" />
+      <End Role="BECAXPERIODO" EntitySet="BECAXPERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_IDESTUDIANTE" Association="Self.FK_EVALUACION_IDESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_IDRESPONSABLE" Association="Self.FK_EVALUACION_IDRESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_SOLICITUD" Association="Self.FK_EVALUACION_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MENSAJE_ESTADO" Association="Self.FK_MENSAJE_ESTADO">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERIODO_SEMESTRE" Association="Self.FK_PERIODO_SEMESTRE">
+      <End Role="SEMESTRE" EntitySet="SEMESTRE" />
+      <End Role="PERIODO" EntitySet="PERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_BANCO" Association="Self.FK_SOLICITUD_BANCO">
+      <End Role="BANCO" EntitySet="BANCO" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_BECA" Association="Self.FK_SOLICITUD_BECA">
+      <End Role="BECA" EntitySet="BECA" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_CARRERA" Association="Self.FK_SOLICITUD_CARRERA">
+      <End Role="CARRERA" EntitySet="CARRERA" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_ESTADO" Association="Self.FK_SOLICITUD_ESTADO">
+      <End Role="ESTADOSOLICITUD" EntitySet="ESTADOSOLICITUD" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_ESTUDIANTE" Association="Self.FK_SOLICITUD_ESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_SEMESTRE" Association="Self.FK_SOLICITUD_SEMESTRE">
+      <End Role="SEMESTRE" EntitySet="SEMESTRE" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_ESTADO" Association="Self.FK_TRANSACCIONES_ESTADO">
+      <End Role="ESTADOSOLICITUD" EntitySet="ESTADOSOLICITUD" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_RESPONSABLE" Association="Self.FK_TRANSACCIONES_RESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_SOLICITUD" Association="Self.FK_TRANSACCIONES_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="rol_rol_p_usario_fkey" Association="Self.rol_rol_p_usario_fkey">
+      <End Role="rol" EntitySet="rol" />
+      <End Role="roles_por_usuario" EntitySet="roles_por_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="rol_sistema_fkey" Association="Self.rol_sistema_fkey">
+      <End Role="sistema_informacion" EntitySet="sistema_informacion" />
+      <End Role="rol" EntitySet="rol" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

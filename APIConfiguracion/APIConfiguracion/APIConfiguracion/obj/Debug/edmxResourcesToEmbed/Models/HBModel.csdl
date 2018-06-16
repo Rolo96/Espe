@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HorasBecaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BANCO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_BANCO" FromRole="BANCO" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="BECA">
+    <Key>
+      <PropertyRef Name="Abreviatura" />
+    </Key>
+    <Property Name="Abreviatura" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BECAXPERIODO" Relationship="Self.FK_BECAXPERIODO_BECA" FromRole="BECA" ToRole="BECAXPERIODO" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_BECA" FromRole="BECA" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="BECAAE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Horas" Type="Int32" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_BECAAE_SOLICITUD" FromRole="BECAAE" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="BECAHATU">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nota" Type="Int32" />
+    <Property Name="NombreResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_BECAHATU_SOLICITUD" FromRole="BECAHATU" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="BECAXPERIODO">
+    <Key>
+      <PropertyRef Name="IdPeriodo" />
+      <PropertyRef Name="AbreviaturaBeca" />
+    </Key>
+    <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+    <Property Name="AbreviaturaBeca" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Horas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BECA" Relationship="Self.FK_BECAXPERIODO_BECA" FromRole="BECAXPERIODO" ToRole="BECA" />
+    <NavigationProperty Name="PERIODO" Relationship="Self.FK_BECAXPERIODO_PERIODO" FromRole="BECAXPERIODO" ToRole="PERIODO" />
+  </EntityType>
+  <EntityType Name="CARRERA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_CARRERA" FromRole="CARRERA" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Estado1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="MENSAJE" Relationship="Self.FK_MENSAJE_ESTADO" FromRole="ESTADO" ToRole="MENSAJE" />
+  </EntityType>
+  <EntityType Name="ESTADOSOLICITUD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_ESTADO" FromRole="ESTADOSOLICITUD" ToRole="SOLICITUD" />
+    <NavigationProperty Name="TRANSACCIONES" Relationship="Self.FK_TRANSACCIONES_ESTADO" FromRole="ESTADOSOLICITUD" ToRole="TRANSACCIONES" />
+  </EntityType>
+  <EntityType Name="estudiantes">
+    <Key>
+      <PropertyRef Name="carne" />
+    </Key>
+    <Property Name="carne" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="estudiantes" ToRole="EVALUACION" />
+    <NavigationProperty Name="RESPONSABLEXESTUDIANTE" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" FromRole="estudiantes" ToRole="RESPONSABLEXESTUDIANTE" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_ESTUDIANTE" FromRole="estudiantes" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="EVALUACION">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Recomendable" Type="Boolean" Nullable="false" />
+    <Property Name="HorasLaboradas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="estudiantes" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="EVALUACION" ToRole="estudiantes" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="EVALUACION" ToRole="usuario" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_EVALUACION_SOLICITUD" FromRole="EVALUACION" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="MENSAJE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="EmailOrigen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailDestino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mensaje1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ESTADO1" Relationship="Self.FK_MENSAJE_ESTADO" FromRole="MENSAJE" ToRole="ESTADO" />
+  </EntityType>
+  <EntityType Name="MENSAJENUEVO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailOrigen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailDestino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mensaje" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Intentos" Type="Int32" Nullable="false" />
+    <Property Name="Prioridad" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PERIODO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaApertura" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdAdministrador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdSemestre" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BECAXPERIODO" Relationship="Self.FK_BECAXPERIODO_PERIODO" FromRole="PERIODO" ToRole="BECAXPERIODO" />
+    <NavigationProperty Name="SEMESTRE" Relationship="Self.FK_PERIODO_SEMESTRE" FromRole="PERIODO" ToRole="SEMESTRE" />
+  </EntityType>
+  <EntityType Name="RESPONSABLEXESTUDIANTE">
+    <Key>
+      <PropertyRef Name="IdResponsable" />
+      <PropertyRef Name="IdEstudiante" />
+    </Key>
+    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="estudiantes" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" FromRole="RESPONSABLEXESTUDIANTE" ToRole="estudiantes" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE" FromRole="RESPONSABLEXESTUDIANTE" ToRole="usuario" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD" FromRole="RESPONSABLEXESTUDIANTE" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="sistema" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="sistema_informacion" Relationship="Self.rol_sistema_fkey" FromRole="rol" ToRole="sistema_informacion" />
+    <NavigationProperty Name="usuario" Relationship="Self.roles_por_usuario" FromRole="rol" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="SEMESTRE">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Semestre1" Type="Int32" Nullable="false" />
+    <Property Name="Ano" Type="Int32" Nullable="false" />
+    <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaTrabajoSocial" Type="DateTime" Precision="3" />
+    <Property Name="FechaInicioEvaluacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaCierreEvaluacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="PERIODO" Relationship="Self.FK_PERIODO_SEMESTRE" FromRole="SEMESTRE" ToRole="PERIODO" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_SOLICITUD_SEMESTRE" FromRole="SEMESTRE" ToRole="SOLICITUD" />
+  </EntityType>
+  <EntityType Name="sistema_informacion">
+    <Key>
+      <PropertyRef Name="id_sistema" />
+    </Key>
+    <Property Name="id_sistema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="rol" Relationship="Self.rol_sistema_fkey" FromRole="sistema_informacion" ToRole="rol" />
+  </EntityType>
+  <EntityType Name="SOLICITUD">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cedula" Type="Int32" />
+    <Property Name="Carne" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int32" />
+    <Property Name="Estado" Type="Int32" />
+    <Property Name="FechaAlmacenamiento" Type="DateTime" Precision="3" />
+    <Property Name="HorasAsignadas" Type="Int32" />
+    <Property Name="CumpleRequisitos" Type="Boolean" />
+    <Property Name="OtraBeca" Type="Boolean" />
+    <Property Name="OtraEscuela" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OtraHoras" Type="Int32" />
+    <Property Name="PonderadoAnterior" Type="Int32" />
+    <Property Name="PonderadoGeneral" Type="Int32" />
+    <Property Name="CreditosAprobadosAnterior" Type="Int32" />
+    <Property Name="CreditosAprobadosTotal" Type="Int32" />
+    <Property Name="CreditosSemestreActual" Type="Int32" />
+    <Property Name="CursosPendientes" Type="Int32" />
+    <Property Name="AnosActivoTec" Type="Int32" />
+    <Property Name="NumeroCuenta" Type="Int32" />
+    <Property Name="ScreenShotCedula" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScreenShotPonderadoAnterior" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScreenShotPonderadoGeneral" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScreenShotCreditosAprobadosAnterior" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScreenShotCreditosAprobadosTotal" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ScreenShotCuentaBanco" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ObservacionesEvaluación" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IdSemestre" Type="Int32" Nullable="false" />
+    <Property Name="IdEstado" Type="Int32" Nullable="false" />
+    <Property Name="IdBanco" Type="Int32" Nullable="false" />
+    <Property Name="AbreviaturaBeca" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdCarrera" Type="Int32" />
+    <NavigationProperty Name="BANCO" Relationship="Self.FK_SOLICITUD_BANCO" FromRole="SOLICITUD" ToRole="BANCO" />
+    <NavigationProperty Name="BECA" Relationship="Self.FK_SOLICITUD_BECA" FromRole="SOLICITUD" ToRole="BECA" />
+    <NavigationProperty Name="BECAAE" Relationship="Self.FK_BECAAE_SOLICITUD" FromRole="SOLICITUD" ToRole="BECAAE" />
+    <NavigationProperty Name="BECAHATU" Relationship="Self.FK_BECAHATU_SOLICITUD" FromRole="SOLICITUD" ToRole="BECAHATU" />
+    <NavigationProperty Name="CARRERA" Relationship="Self.FK_SOLICITUD_CARRERA" FromRole="SOLICITUD" ToRole="CARRERA" />
+    <NavigationProperty Name="ESTADOSOLICITUD" Relationship="Self.FK_SOLICITUD_ESTADO" FromRole="SOLICITUD" ToRole="ESTADOSOLICITUD" />
+    <NavigationProperty Name="estudiantes" Relationship="Self.FK_SOLICITUD_ESTUDIANTE" FromRole="SOLICITUD" ToRole="estudiantes" />
+    <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_SOLICITUD" FromRole="SOLICITUD" ToRole="EVALUACION" />
+    <NavigationProperty Name="RESPONSABLEXESTUDIANTE" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD" FromRole="SOLICITUD" ToRole="RESPONSABLEXESTUDIANTE" />
+    <NavigationProperty Name="SEMESTRE" Relationship="Self.FK_SOLICITUD_SEMESTRE" FromRole="SOLICITUD" ToRole="SEMESTRE" />
+    <NavigationProperty Name="TRANSACCIONES" Relationship="Self.FK_TRANSACCIONES_SOLICITUD" FromRole="SOLICITUD" ToRole="TRANSACCIONES" />
+  </EntityType>
+  <EntityType Name="TRANSACCIONES">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+    <Property Name="IdEstado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ESTADOSOLICITUD" Relationship="Self.FK_TRANSACCIONES_ESTADO" FromRole="TRANSACCIONES" ToRole="ESTADOSOLICITUD" />
+    <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_TRANSACCIONES_SOLICITUD" FromRole="TRANSACCIONES" ToRole="SOLICITUD" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK_TRANSACCIONES_RESPONSABLE" FromRole="TRANSACCIONES" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="correo_electronico" />
+    </Key>
+    <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="contrasenna" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="usuario" ToRole="EVALUACION" />
+    <NavigationProperty Name="RESPONSABLEXESTUDIANTE" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE" FromRole="usuario" ToRole="RESPONSABLEXESTUDIANTE" />
+    <NavigationProperty Name="TRANSACCIONES" Relationship="Self.FK_TRANSACCIONES_RESPONSABLE" FromRole="usuario" ToRole="TRANSACCIONES" />
+    <NavigationProperty Name="rol" Relationship="Self.roles_por_usuario" FromRole="usuario" ToRole="rol" />
+  </EntityType>
+  <Association Name="FK_SOLICITUD_BANCO">
+    <End Role="BANCO" Type="Self.BANCO" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BANCO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdBanco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAXPERIODO_BECA">
+    <End Role="BECA" Type="Self.BECA" Multiplicity="1" />
+    <End Role="BECAXPERIODO" Type="Self.BECAXPERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BECA">
+        <PropertyRef Name="Abreviatura" />
+      </Principal>
+      <Dependent Role="BECAXPERIODO">
+        <PropertyRef Name="AbreviaturaBeca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_BECA">
+    <End Role="BECA" Type="Self.BECA" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BECA">
+        <PropertyRef Name="Abreviatura" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="AbreviaturaBeca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAAE_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="BECAAE" Type="Self.BECAAE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAAE">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAHATU_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="BECAHATU" Type="Self.BECAHATU" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAHATU">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BECAXPERIODO_PERIODO">
+    <End Role="PERIODO" Type="Self.PERIODO" Multiplicity="1" />
+    <End Role="BECAXPERIODO" Type="Self.BECAXPERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PERIODO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BECAXPERIODO">
+        <PropertyRef Name="IdPeriodo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_CARRERA">
+    <End Role="CARRERA" Type="Self.CARRERA" Multiplicity="0..1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARRERA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdCarrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MENSAJE_ESTADO">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+    <End Role="MENSAJE" Type="Self.MENSAJE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MENSAJE">
+        <PropertyRef Name="Estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_ESTADO">
+    <End Role="ESTADOSOLICITUD" Type="Self.ESTADOSOLICITUD" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_ESTADO">
+    <End Role="ESTADOSOLICITUD" Type="Self.ESTADOSOLICITUD" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADOSOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdEstado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_IDESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdEstudiante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_ESTUDIANTE">
+    <End Role="estudiantes" Type="Self.estudiantes" Multiplicity="0..1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estudiantes">
+        <PropertyRef Name="carne" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="Carne" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_IDRESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="correo_electronico" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACION_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EVALUACION">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PERIODO_SEMESTRE">
+    <End Role="SEMESTRE" Type="Self.SEMESTRE" Multiplicity="1" />
+    <End Role="PERIODO" Type="Self.PERIODO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEMESTRE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PERIODO">
+        <PropertyRef Name="IdSemestre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="correo_electronico" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RESPONSABLEXESTUDIANTE">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="rol_sistema_fkey">
+    <End Role="sistema_informacion" Type="Self.sistema_informacion" Multiplicity="1" />
+    <End Role="rol" Type="Self.rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sistema_informacion">
+        <PropertyRef Name="id_sistema" />
+      </Principal>
+      <Dependent Role="rol">
+        <PropertyRef Name="sistema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SOLICITUD_SEMESTRE">
+    <End Role="SEMESTRE" Type="Self.SEMESTRE" Multiplicity="1" />
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SEMESTRE">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SOLICITUD">
+        <PropertyRef Name="IdSemestre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_SOLICITUD">
+    <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SOLICITUD">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdSolicitud" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TRANSACCIONES_RESPONSABLE">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="correo_electronico" />
+      </Principal>
+      <Dependent Role="TRANSACCIONES">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="roles_por_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+    <End Role="rol" Type="Self.rol" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="HorasBecaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BANCO" EntityType="Self.BANCO" />
+    <EntitySet Name="BECA" EntityType="Self.BECA" />
+    <EntitySet Name="BECAAE" EntityType="Self.BECAAE" />
+    <EntitySet Name="BECAHATU" EntityType="Self.BECAHATU" />
+    <EntitySet Name="BECAXPERIODO" EntityType="Self.BECAXPERIODO" />
+    <EntitySet Name="CARRERA" EntityType="Self.CARRERA" />
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+    <EntitySet Name="ESTADOSOLICITUD" EntityType="Self.ESTADOSOLICITUD" />
+    <EntitySet Name="estudiantes" EntityType="Self.estudiantes" />
+    <EntitySet Name="EVALUACION" EntityType="Self.EVALUACION" />
+    <EntitySet Name="MENSAJE" EntityType="Self.MENSAJE" />
+    <EntitySet Name="MENSAJENUEVO" EntityType="Self.MENSAJENUEVO" />
+    <EntitySet Name="PERIODO" EntityType="Self.PERIODO" />
+    <EntitySet Name="RESPONSABLEXESTUDIANTE" EntityType="Self.RESPONSABLEXESTUDIANTE" />
+    <EntitySet Name="rol" EntityType="Self.rol" />
+    <EntitySet Name="SEMESTRE" EntityType="Self.SEMESTRE" />
+    <EntitySet Name="sistema_informacion" EntityType="Self.sistema_informacion" />
+    <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" />
+    <EntitySet Name="TRANSACCIONES" EntityType="Self.TRANSACCIONES" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="FK_SOLICITUD_BANCO" Association="Self.FK_SOLICITUD_BANCO">
+      <End Role="BANCO" EntitySet="BANCO" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAXPERIODO_BECA" Association="Self.FK_BECAXPERIODO_BECA">
+      <End Role="BECA" EntitySet="BECA" />
+      <End Role="BECAXPERIODO" EntitySet="BECAXPERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_BECA" Association="Self.FK_SOLICITUD_BECA">
+      <End Role="BECA" EntitySet="BECA" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAAE_SOLICITUD" Association="Self.FK_BECAAE_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="BECAAE" EntitySet="BECAAE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAHATU_SOLICITUD" Association="Self.FK_BECAHATU_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="BECAHATU" EntitySet="BECAHATU" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BECAXPERIODO_PERIODO" Association="Self.FK_BECAXPERIODO_PERIODO">
+      <End Role="PERIODO" EntitySet="PERIODO" />
+      <End Role="BECAXPERIODO" EntitySet="BECAXPERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_CARRERA" Association="Self.FK_SOLICITUD_CARRERA">
+      <End Role="CARRERA" EntitySet="CARRERA" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MENSAJE_ESTADO" Association="Self.FK_MENSAJE_ESTADO">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="MENSAJE" EntitySet="MENSAJE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_ESTADO" Association="Self.FK_SOLICITUD_ESTADO">
+      <End Role="ESTADOSOLICITUD" EntitySet="ESTADOSOLICITUD" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_ESTADO" Association="Self.FK_TRANSACCIONES_ESTADO">
+      <End Role="ESTADOSOLICITUD" EntitySet="ESTADOSOLICITUD" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_IDESTUDIANTE" Association="Self.FK_EVALUACION_IDESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_ESTUDIANTE" Association="Self.FK_SOLICITUD_ESTUDIANTE">
+      <End Role="estudiantes" EntitySet="estudiantes" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_IDRESPONSABLE" Association="Self.FK_EVALUACION_IDRESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACION_SOLICITUD" Association="Self.FK_EVALUACION_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="EVALUACION" EntitySet="EVALUACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PERIODO_SEMESTRE" Association="Self.FK_PERIODO_SEMESTRE">
+      <End Role="SEMESTRE" EntitySet="SEMESTRE" />
+      <End Role="PERIODO" EntitySet="PERIODO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDRESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD" Association="Self.FK_RESPONSABLEXESTUDIANTE_IDSOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="RESPONSABLEXESTUDIANTE" EntitySet="RESPONSABLEXESTUDIANTE" />
+    </AssociationSet>
+    <AssociationSet Name="rol_sistema_fkey" Association="Self.rol_sistema_fkey">
+      <End Role="sistema_informacion" EntitySet="sistema_informacion" />
+      <End Role="rol" EntitySet="rol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SOLICITUD_SEMESTRE" Association="Self.FK_SOLICITUD_SEMESTRE">
+      <End Role="SEMESTRE" EntitySet="SEMESTRE" />
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_SOLICITUD" Association="Self.FK_TRANSACCIONES_SOLICITUD">
+      <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TRANSACCIONES_RESPONSABLE" Association="Self.FK_TRANSACCIONES_RESPONSABLE">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="TRANSACCIONES" EntitySet="TRANSACCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="roles_por_usuario" Association="Self.roles_por_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="rol" EntitySet="rol" />
+    </AssociationSet>
+    <FunctionImport Name="insertarSemestre">
+      <Parameter Name="Semestre" Mode="In" Type="Int32" />
+      <Parameter Name="Ano" Mode="In" Type="Int32" />
+      <Parameter Name="FechaApertura" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="editarSemestre">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+      <Parameter Name="FechaInicioEvaluacion" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaCierreEvaluacion" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaTrabajoSocial" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="insertarPeriodo">
+      <Parameter Name="FechaApertura" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
+      <Parameter Name="IdAdministrador" Mode="In" Type="String" />
+      <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+      <Parameter Name="becas" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>
