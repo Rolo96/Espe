@@ -33,6 +33,7 @@
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Nota" ColumnName="Nota" />
           <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+          <ScalarProperty Name="ScreenShotNota" ColumnName="ScreenShotNota" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +226,8 @@
     <EntitySetMapping Name="usuario">
       <EntityTypeMapping TypeName="HorasBecaModel.usuario">
         <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
           <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
           <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
           <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
@@ -236,7 +239,7 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="roles_por_usuario" TypeName="HorasBecaModel.roles_por_usuario" StoreEntitySet="roles_por_usuario">
       <EndProperty Name="usuario">
-        <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+        <ScalarProperty Name="id" ColumnName="usuario" />
       </EndProperty>
       <EndProperty Name="rol">
         <ScalarProperty Name="id_rol" ColumnName="rol" />
@@ -245,5 +248,6 @@
     <FunctionImportMapping FunctionImportName="insertarSemestre" FunctionName="HorasBecaModel.Store.INSERTARSEMESTRE" />
     <FunctionImportMapping FunctionImportName="editarSemestre" FunctionName="HorasBecaModel.Store.EDITARSEMESTRE" />
     <FunctionImportMapping FunctionImportName="insertarPeriodo" FunctionName="HorasBecaModel.Store.INSERTARPERIODO" />
+    <FunctionImportMapping FunctionImportName="editarPeriodo" FunctionName="HorasBecaModel.Store.EDITARPERIODO" />
   </EntityContainerMapping>
 </Mapping>

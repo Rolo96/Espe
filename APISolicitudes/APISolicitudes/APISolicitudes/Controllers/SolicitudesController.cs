@@ -811,6 +811,7 @@ namespace APISolicitudes.Controllers
                                     s.Carne,
                                     s.NumeroCuenta,
                                     Estado = e.Nombre,
+                                    s.IdEstado,
                                     b.Tipo,
                                     Beca = s.AbreviaturaBeca
                                 }).OrderBy((x) => x.Id).ToList();

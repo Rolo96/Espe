@@ -90,7 +90,7 @@ namespace APIConfiguracion.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("editarSemestre", idParameter, fechaInicioEvaluacionParameter, fechaCierreEvaluacionParameter, fechaTrabajoSocialParameter);
         }
     
-        public virtual int insertarPeriodo(Nullable<System.DateTime> fechaApertura, Nullable<System.DateTime> fechaCierre, string idAdministrador, Nullable<int> idSemestre, string becas)
+        public virtual int insertarPeriodo(Nullable<System.DateTime> fechaApertura, Nullable<System.DateTime> fechaCierre, Nullable<int> idAdministrador, Nullable<int> idSemestre, string becas)
         {
             var fechaAperturaParameter = fechaApertura.HasValue ?
                 new ObjectParameter("FechaApertura", fechaApertura) :
@@ -100,9 +100,9 @@ namespace APIConfiguracion.Models
                 new ObjectParameter("FechaCierre", fechaCierre) :
                 new ObjectParameter("FechaCierre", typeof(System.DateTime));
     
-            var idAdministradorParameter = idAdministrador != null ?
+            var idAdministradorParameter = idAdministrador.HasValue ?
                 new ObjectParameter("IdAdministrador", idAdministrador) :
-                new ObjectParameter("IdAdministrador", typeof(string));
+                new ObjectParameter("IdAdministrador", typeof(int));
     
             var idSemestreParameter = idSemestre.HasValue ?
                 new ObjectParameter("IdSemestre", idSemestre) :
@@ -113,6 +113,27 @@ namespace APIConfiguracion.Models
                 new ObjectParameter("becas", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarPeriodo", fechaAperturaParameter, fechaCierreParameter, idAdministradorParameter, idSemestreParameter, becasParameter);
+        }
+    
+        public virtual int editarPeriodo(Nullable<int> id, Nullable<System.DateTime> fechaApertura, Nullable<System.DateTime> fechaCierre, string becas)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            var fechaAperturaParameter = fechaApertura.HasValue ?
+                new ObjectParameter("FechaApertura", fechaApertura) :
+                new ObjectParameter("FechaApertura", typeof(System.DateTime));
+    
+            var fechaCierreParameter = fechaCierre.HasValue ?
+                new ObjectParameter("FechaCierre", fechaCierre) :
+                new ObjectParameter("FechaCierre", typeof(System.DateTime));
+    
+            var becasParameter = becas != null ?
+                new ObjectParameter("becas", becas) :
+                new ObjectParameter("becas", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("editarPeriodo", idParameter, fechaAperturaParameter, fechaCierreParameter, becasParameter);
         }
     }
 }

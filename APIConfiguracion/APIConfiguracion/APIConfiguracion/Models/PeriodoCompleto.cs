@@ -10,7 +10,8 @@ namespace APIConfiguracion.Models
         public string Becas { get; set; }
         public System.DateTime FechaApertura { get; set; }
         public System.DateTime FechaCierre { get; set; }
-        public string IdAdministrador { get; set; }
+        public int IdAdministrador { get; set; }
         public int IdSemestre { get; set; }
+        public int Id { get; set; }
     }
 }

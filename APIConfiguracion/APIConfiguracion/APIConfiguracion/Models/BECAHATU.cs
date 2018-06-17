@@ -19,6 +19,7 @@ namespace APIConfiguracion.Models
         public string Nombre { get; set; }
         public Nullable<int> Nota { get; set; }
         public string NombreResponsable { get; set; }
+        public byte[] ScreenShotNota { get; set; }
     
         public virtual SOLICITUD SOLICITUD { get; set; }
     }

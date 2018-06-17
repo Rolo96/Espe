@@ -35,6 +35,7 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Nota" Type="int" />
           <Property Name="NombreResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="ScreenShotNota" Type="image" />
         </EntityType>
         <EntityType Name="BECAXPERIODO">
           <Key>
@@ -73,7 +74,7 @@
           <Property Name="carne" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="correo_electronico" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="primer_nombre" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="segundo_nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="segundo_nombre" Type="varchar" MaxLength="20" />
           <Property Name="primer_apellido" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="segundo_apellido" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -86,7 +87,7 @@
           <Property Name="Recomendable" Type="bit" Nullable="false" />
           <Property Name="HorasLaboradas" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEstudiante" Type="varchar" MaxLength="11" Nullable="false" />
-          <Property Name="IdResponsable" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdResponsable" Type="int" Nullable="false" />
           <Property Name="IdSolicitud" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MENSAJE">
@@ -119,7 +120,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FechaApertura" Type="datetime" Nullable="false" />
           <Property Name="FechaCierre" Type="datetime" Nullable="false" />
-          <Property Name="IdAdministrador" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdAdministrador" Type="int" Nullable="false" />
           <Property Name="IdSemestre" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RESPONSABLEXESTUDIANTE">
@@ -127,7 +128,7 @@
             <PropertyRef Name="IdResponsable" />
             <PropertyRef Name="IdEstudiante" />
           </Key>
-          <Property Name="IdResponsable" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdResponsable" Type="int" Nullable="false" />
           <Property Name="IdEstudiante" Type="varchar" MaxLength="11" Nullable="false" />
           <Property Name="IdSolicitud" Type="int" Nullable="false" />
         </EntityType>
@@ -141,10 +142,10 @@
         </EntityType>
         <EntityType Name="roles_por_usuario">
           <Key>
-            <PropertyRef Name="correo_electronico" />
+            <PropertyRef Name="usuario" />
             <PropertyRef Name="rol" />
           </Key>
-          <Property Name="correo_electronico" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="usuario" Type="int" Nullable="false" />
           <Property Name="rol" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SEMESTRE">
@@ -212,19 +213,21 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdResponsable" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdResponsable" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="IdSolicitud" Type="int" Nullable="false" />
           <Property Name="IdEstado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
-            <PropertyRef Name="correo_electronico" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="correo_electronico" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="contrasenna" Type="varchar(max)" Nullable="false" />
           <Property Name="primer_nombre" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="segundo_nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="segundo_nombre" Type="varchar" MaxLength="20" />
           <Property Name="primer_apellido" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="segundo_apellido" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
@@ -233,10 +236,10 @@
           <End Role="roles_por_usuario" Type="Self.roles_por_usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="roles_por_usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -305,7 +308,7 @@
           <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="EVALUACION">
               <PropertyRef Name="IdResponsable" />
@@ -365,7 +368,7 @@
           <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="RESPONSABLEXESTUDIANTE">
               <PropertyRef Name="IdResponsable" />
@@ -473,7 +476,7 @@
           <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="TRANSACCIONES">
               <PropertyRef Name="IdResponsable" />
@@ -519,10 +522,14 @@
         <Function Name="APROBARSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdSolicitud" Type="int" Mode="In" />
           <Parameter Name="IdEstudiante" Type="varchar" Mode="In" />
-          <Parameter Name="IdResponsable" Type="varchar" Mode="In" />
+          <Parameter Name="IdResponsable" Type="int" Mode="In" />
           <Parameter Name="Observacion" Type="varchar" Mode="In" />
           <Parameter Name="HorasAsignadas" Type="int" Mode="In" />
           <Parameter Name="IdEstado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CAMBIARCONTRASENNA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="contrasenna" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="CAMBIARESTADOSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -531,6 +538,23 @@
         <Function Name="CAMBIARIDESTADOSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="IdEstado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CANCELARSOLICITUDREVISADA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="int" Mode="In" />
+          <Parameter Name="Observacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DUPLICARSOLICITUD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="EDITAREVALUARASISTENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEvaluacion" Type="int" Mode="In" />
+          <Parameter Name="Observacion" Type="varchar" Mode="In" />
+          <Parameter Name="Recomendable" Type="bit" Mode="In" />
+          <Parameter Name="HorasLaboradas" Type="int" Mode="In" />
         </Function>
         <Function Name="EDITARPERIODO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
@@ -547,7 +571,7 @@
         <Function Name="EDITARSOLICITUDAE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -573,15 +597,14 @@
           <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
           <Parameter Name="IdBanco" Type="int" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="Horas" Type="int" Mode="In" />
           <Parameter Name="Carrera" Type="int" Mode="In" />
         </Function>
         <Function Name="EDITARSOLICITUDHATU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -606,9 +629,9 @@
           <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+          <Parameter Name="ScreenShotNota" Type="image" Mode="In" />
           <Parameter Name="IdBanco" Type="int" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="Codigo" Type="varchar" Mode="In" />
           <Parameter Name="NombreCurso" Type="varchar" Mode="In" />
           <Parameter Name="Nota" Type="int" Mode="In" />
@@ -618,7 +641,7 @@
         <Function Name="EDITARSOLICITUDHE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -644,13 +667,17 @@
           <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
           <Parameter Name="IdBanco" Type="int" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
+          <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="Carrera" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ENVIARSOLICITUDGUARDADA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
         </Function>
         <Function Name="EVALUARASISTENTE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEstudiante" Type="varchar" Mode="In" />
-          <Parameter Name="IdResponsable" Type="varchar" Mode="In" />
+          <Parameter Name="IdResponsable" Type="int" Mode="In" />
           <Parameter Name="Observacion" Type="varchar" Mode="In" />
           <Parameter Name="Recomendable" Type="bit" Mode="In" />
           <Parameter Name="HorasLaboradas" Type="int" Mode="In" />
@@ -672,7 +699,7 @@
         <Function Name="INSERTARPERIODO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FechaApertura" Type="datetime" Mode="In" />
           <Parameter Name="FechaCierre" Type="datetime" Mode="In" />
-          <Parameter Name="IdAdministrador" Type="varchar" Mode="In" />
+          <Parameter Name="IdAdministrador" Type="int" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="becas" Type="nvarchar(max)" Mode="In" />
         </Function>
@@ -684,7 +711,7 @@
         </Function>
         <Function Name="INSERTARSOLICITUDAE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -713,14 +740,12 @@
           <Parameter Name="IdBanco" Type="int" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
           <Parameter Name="Horas" Type="int" Mode="In" />
           <Parameter Name="Carrera" Type="int" Mode="In" />
         </Function>
         <Function Name="INSERTARSOLICITUDHATU" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -746,11 +771,10 @@
           <Parameter Name="ScreenShotCreditosAprobadosAnterior" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCreditosAprobadosTotal" Type="image" Mode="In" />
           <Parameter Name="ScreenShotCuentaBanco" Type="image" Mode="In" />
+          <Parameter Name="ScreenShotNota" Type="image" Mode="In" />
           <Parameter Name="IdBanco" Type="int" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
           <Parameter Name="Codigo" Type="varchar" Mode="In" />
           <Parameter Name="NombreCurso" Type="varchar" Mode="In" />
           <Parameter Name="Nota" Type="int" Mode="In" />
@@ -759,7 +783,7 @@
         </Function>
         <Function Name="INSERTARSOLICITUDHE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cedula" Type="int" Mode="In" />
-          <Parameter Name="Carne" Type="int" Mode="In" />
+          <Parameter Name="Carne" Type="varchar" Mode="In" />
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Apellido1" Type="varchar" Mode="In" />
           <Parameter Name="Apellido2" Type="varchar" Mode="In" />
@@ -788,8 +812,6 @@
           <Parameter Name="IdBanco" Type="int" Mode="In" />
           <Parameter Name="IdSemestre" Type="int" Mode="In" />
           <Parameter Name="AbreviaturaBeca" Type="varchar" Mode="In" />
-          <Parameter Name="EscuelaOtraBeca" Type="varchar" Mode="In" />
-          <Parameter Name="HorasOtraBeca" Type="int" Mode="In" />
           <Parameter Name="Carrera" Type="int" Mode="In" />
         </Function>
         <Function Name="INSERTARTRANSACCION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -803,6 +825,16 @@
           <Parameter Name="Estado" Type="int" Mode="In" />
         </Function>
         <Function Name="OBTENERMESAJESNUEVOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="REGISTRARUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cedula" Type="varchar" Mode="In" />
+          <Parameter Name="correo_electronico" Type="varchar" Mode="In" />
+          <Parameter Name="contrasenna" Type="varchar(max)" Mode="In" />
+          <Parameter Name="primer_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="segundo_nombre" Type="varchar" Mode="In" />
+          <Parameter Name="primer_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="segundo_apellido" Type="varchar" Mode="In" />
+          <Parameter Name="rol" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HorasBecaModelStoreContainer">
           <EntitySet Name="BANCO" EntityType="Self.BANCO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BECA" EntityType="Self.BECA" Schema="dbo" store:Type="Tables" />
@@ -961,6 +993,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nota" Type="Int32" />
           <Property Name="NombreResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ScreenShotNota" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_BECAHATU_SOLICITUD" FromRole="BECAHATU" ToRole="SOLICITUD" />
         </EntityType>
         <EntityType Name="BECAXPERIODO">
@@ -1006,7 +1039,7 @@
           <Property Name="carne" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="estudiantes" ToRole="EVALUACION" />
@@ -1022,7 +1055,7 @@
           <Property Name="Recomendable" Type="Boolean" Nullable="false" />
           <Property Name="HorasLaboradas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdResponsable" Type="Int32" Nullable="false" />
           <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
           <NavigationProperty Name="estudiantes" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="EVALUACION" ToRole="estudiantes" />
           <NavigationProperty Name="usuario" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="EVALUACION" ToRole="usuario" />
@@ -1059,7 +1092,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FechaApertura" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdAdministrador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdAdministrador" Type="Int32" Nullable="false" />
           <Property Name="IdSemestre" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BECAXPERIODO" Relationship="Self.FK_BECAXPERIODO_PERIODO" FromRole="PERIODO" ToRole="BECAXPERIODO" />
           <NavigationProperty Name="SEMESTRE" Relationship="Self.FK_PERIODO_SEMESTRE" FromRole="PERIODO" ToRole="SEMESTRE" />
@@ -1069,7 +1102,7 @@
             <PropertyRef Name="IdResponsable" />
             <PropertyRef Name="IdEstudiante" />
           </Key>
-          <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdResponsable" Type="Int32" Nullable="false" />
           <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
           <NavigationProperty Name="estudiantes" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" FromRole="RESPONSABLEXESTUDIANTE" ToRole="estudiantes" />
@@ -1165,7 +1198,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdResponsable" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
           <Property Name="IdEstado" Type="Int32" Nullable="false" />
@@ -1175,12 +1208,14 @@
         </EntityType>
         <EntityType Name="usuario">
           <Key>
-            <PropertyRef Name="correo_electronico" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contrasenna" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="usuario" ToRole="EVALUACION" />
@@ -1349,7 +1384,7 @@
           <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="EVALUACION">
               <PropertyRef Name="IdResponsable" />
@@ -1385,7 +1420,7 @@
           <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="RESPONSABLEXESTUDIANTE">
               <PropertyRef Name="IdResponsable" />
@@ -1445,7 +1480,7 @@
           <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="usuario">
-              <PropertyRef Name="correo_electronico" />
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="TRANSACCIONES">
               <PropertyRef Name="IdResponsable" />
@@ -1584,8 +1619,14 @@
           <FunctionImport Name="insertarPeriodo">
             <Parameter Name="FechaApertura" Mode="In" Type="DateTime" />
             <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
-            <Parameter Name="IdAdministrador" Mode="In" Type="String" />
+            <Parameter Name="IdAdministrador" Mode="In" Type="Int32" />
             <Parameter Name="IdSemestre" Mode="In" Type="Int32" />
+            <Parameter Name="becas" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="editarPeriodo">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FechaApertura" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaCierre" Mode="In" Type="DateTime" />
             <Parameter Name="becas" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -1627,6 +1668,7 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Nota" ColumnName="Nota" />
                 <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+                <ScalarProperty Name="ScreenShotNota" ColumnName="ScreenShotNota" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1819,6 +1861,8 @@
           <EntitySetMapping Name="usuario">
             <EntityTypeMapping TypeName="HorasBecaModel.usuario">
               <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
                 <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
                 <ScalarProperty Name="contrasenna" ColumnName="contrasenna" />
                 <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
@@ -1830,7 +1874,7 @@
           </EntitySetMapping>
           <AssociationSetMapping Name="roles_por_usuario" TypeName="HorasBecaModel.roles_por_usuario" StoreEntitySet="roles_por_usuario">
             <EndProperty Name="usuario">
-              <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+              <ScalarProperty Name="id" ColumnName="usuario" />
             </EndProperty>
             <EndProperty Name="rol">
               <ScalarProperty Name="id_rol" ColumnName="rol" />
@@ -1839,6 +1883,7 @@
           <FunctionImportMapping FunctionImportName="insertarSemestre" FunctionName="HorasBecaModel.Store.INSERTARSEMESTRE" />
           <FunctionImportMapping FunctionImportName="editarSemestre" FunctionName="HorasBecaModel.Store.EDITARSEMESTRE" />
           <FunctionImportMapping FunctionImportName="insertarPeriodo" FunctionName="HorasBecaModel.Store.INSERTARPERIODO" />
+          <FunctionImportMapping FunctionImportName="editarPeriodo" FunctionName="HorasBecaModel.Store.EDITARPERIODO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

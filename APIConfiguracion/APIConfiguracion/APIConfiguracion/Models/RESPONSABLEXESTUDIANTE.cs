@@ -14,7 +14,7 @@ namespace APIConfiguracion.Models
     
     public partial class RESPONSABLEXESTUDIANTE
     {
-        public string IdResponsable { get; set; }
+        public int IdResponsable { get; set; }
         public string IdEstudiante { get; set; }
         public int IdSolicitud { get; set; }
     

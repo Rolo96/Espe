@@ -47,6 +47,25 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("editarPeriodo")]
+        public HttpResponseMessage EditarPeriodo(PeriodoCompleto periodo)
+        {
+            using (HorasBecaEntities entities = new HorasBecaEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        entities.editarPeriodo(periodo.Id, periodo.FechaApertura, periodo.FechaCierre, "[]");
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
+                }
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+        }
+
         [HttpGet]
         [Route("roles")]
         public HttpResponseMessage VerRoles()
@@ -148,6 +167,34 @@ namespace APIConfiguracion.Controllers
                                             s.Id
                                         }).FirstOrDefault();
                         return Request.CreateResponse(HttpStatusCode.OK, semestre);
+                    }
+                    catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
+                }
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+        }
+
+        [HttpGet]
+        [Route("usuarios")]
+        public HttpResponseMessage usuarios()
+        {
+            using (HorasBecaEntities entities = new HorasBecaEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        var usuarios = (from u in entities.usuario
+                                        select new
+                                        {
+                                            u.primer_nombre,
+                                            u.segundo_nombre,
+                                            u.primer_apellido,
+                                            u.segundo_apellido,
+                                            u.cedula,
+                                            u.correo_electronico
+                                        }).OrderBy((x) => x.primer_nombre).ToList();
+                        return Request.CreateResponse(HttpStatusCode.OK, usuarios);
                     }
                     catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
                 }

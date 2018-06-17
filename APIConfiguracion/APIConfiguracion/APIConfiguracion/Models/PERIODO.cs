@@ -23,7 +23,7 @@ namespace APIConfiguracion.Models
         public int Id { get; set; }
         public System.DateTime FechaApertura { get; set; }
         public System.DateTime FechaCierre { get; set; }
-        public string IdAdministrador { get; set; }
+        public int IdAdministrador { get; set; }
         public int IdSemestre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
