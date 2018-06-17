@@ -1,0 +1,52 @@
+﻿<link href="css/estilos.css" rel="stylesheet" />
+<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<div class="container-fluid" style="width:100%">
+    <div class="container-fluid justify-content-center" style="width:70%">
+        <table class="table table-striped">
+            <thead>
+                <tr><th colspan="8" id = "titulosTablas" style="text-align:center">Mis solicitudes enviadas</th></tr>
+                <tr>
+                    <th>Tipo de beca</th>
+                    <th>Fecha de envío</th>
+                    <th colspan="6">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="solicitud in solicitudesEnviadas">
+                    <td>{{solicitud.Tipo}}</td>
+                    <td>{{calculateTime(solicitud.FechaAlmacenamiento) | date: 'd MMMM  yyyy - HH:mm'}}</td>
+                    <td>{{solicitud.Estado}}</td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Detalles">
+                            <i class=" fa fa-eye fa-lg" ng-click="verFormularioSolicitud(solicitud.Id,'detallesEstudiante',solicitud.AbreviaturaBeca)" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Editar">
+                            <i class=" fa fa-edit fa-lg" ng-show="(solicitud.IdEstado==2 || solicitud.IdEstado==7) && solicitud.Cancelada!=3" ng-click="verFormularioSolicitud(solicitud.Id, 'editarEnviada',solicitud.AbreviaturaBeca )" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Clonar">
+                            <i class="fa fa-clone fa-lg dropdown" id="clonarDropD" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                            <span class="dropdown-menu" aria-labelledby="nuevaSoliDrop">
+                                <a class="dropdown-item" ng-repeat="beca in scpTiposBeca" data-toggle="modal" data-target="#AlertaConf" ng-click="prevClonarSolicitud(solicitud.Id,beca.AbreviaturaBeca)" href="">{{beca.Tipo}}</a>
+                            </span>
+
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Cancelar solicitud">
+                            <i class=" fa fa-times fa-lg" ng-show="(solicitud.IdEstado==2 || solicitud.IdEstado==7) && solicitud.Cancelada!=3"  data-toggle="modal" data-target="#AlertaConf" ng-click="prevCancelarATiempo(solicitud.Id)" id="DetEditText"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Cancelar solicitud ya revisada">
+                            <i class=" fa fa-ban fa-lg" ng-show="(solicitud.IdEstado!=6 && solicitud.IdEstado!=2 && solicitud.IdEstado!=7) && solicitud.Cancelada!=3" ng-click="generarModalRechazo('cancelar',solicitud.Id)" data-toggle="modal" data-target="#ModalRechazo" id="DetEditText"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

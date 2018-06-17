@@ -1,0 +1,61 @@
+﻿<div class="limiter">
+    <div class="container-login100" style="background-image: url('images/fondoLogin.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form">
+                <span class="login100-form-title">
+                    Sistema de Horas Beca CE
+                </span>
+
+                <div class="wrap-input100 validate-input a" data-validate="Se requiere un Carné válido">
+                    <input class="input100" type="number" name="formA" placeholder="Carné" ng-model="loginCarne">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Se requiere un email válido: ex@abc.xyz">
+                    <input class="input100"  type="text" name="emailFormA" placeholder="Email" ng-model="loginEmail">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+
+                <div class="container-login100-form-btn my-4">
+                    <button class="login100-form-btn" ng-click="generarContrasena()">
+                        Generar Contraseña
+                    </button>
+                </div>
+
+
+
+            </form>
+            <form class="login100-form validate-form">
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="contrasena" placeholder="Contraseña" id="contrasena" ng-model="loginContrasena">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="container-login100-form-btn my-4">
+                    <div class="form-row">
+                        <div class="col">
+                            <button class="login100-form-btn" id="btnIngresar" ng-click="logearse()">
+                                Ingresar
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="login100-form-btn" disabled id="btnReenviar" ng-click="generarContrasena()">
+                                Reenviar Contraseña
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll.config
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.pdb
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CoreCompileInputs.cache
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CopyComplete
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.dll
+C:\Users\Raul AQ\Desktop\Front-End HB\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.pdb
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll.config
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.pdb
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CoreCompileInputs.cache
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CopyComplete
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.pdb
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll.config
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\ComisionHorasBecas.pdb
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CoreCompileInputs.cache
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CopyComplete
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.pdb
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\Newtonsoft.Json.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Net.Http.Formatting.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Web.Http.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Web.Http.WebHost.dll
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\Newtonsoft.Json.xml
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Net.Http.Formatting.xml
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Web.Http.xml
+C:\Users\Raul AQ\Desktop\FrontEndFinal\ComisionHorasBecas\ComisionHorasBecas\bin\System.Web.Http.WebHost.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\ComisionHorasBecas.dll.config
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\ComisionHorasBecas.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\ComisionHorasBecas.pdb
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\Newtonsoft.Json.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Net.Http.Formatting.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Web.Http.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Web.Http.WebHost.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\Newtonsoft.Json.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Net.Http.Formatting.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Web.Http.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\bin\System.Web.Http.WebHost.xml
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csprojResolveAssemblyReference.cache
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CoreCompileInputs.cache
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\obj\Debug\HorasBecaFrontEnd.csproj.CopyComplete
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.dll
+C:\Users\ronxr_000\source\repos\Proyecto Espe\ComisionHorasBecas2\ComisionHorasBecas\obj\Debug\ComisionHorasBecas.pdb

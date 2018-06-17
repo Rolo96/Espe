@@ -1,0 +1,64 @@
+﻿<ng-include src="scpUrlFormsModals"></ng-include>
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('images/fondoLogin.jpg');">
+        <div class="wrap-login100">
+
+
+            <form class="login100-form validate-form">
+                <span class="login100-form-title">
+                    Sistema de Horas Beca CE
+                </span>
+
+
+
+                <div class="wrap-input100 validate-input" data-validate="Se requiere un email válido: ex@abc.xyz">
+                    <input class="input100" type="text" name="email" placeholder="Email" ng-model="loginCorreo">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Contrasena es requerido">
+                    <input class="input100" type="password" name="id" placeholder="Contraseña" ng-model="loginPassword">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-id-card" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn my-4">
+                    <button class="login100-form-btn" ng-click="solicitarLogin()">
+                        Ingresar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalContrasena" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Debe Actualizar su contraseña!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Digite una nueva contraseña de al menos 8 caracteres:</label>
+                        <input class="form-control" type="password" name="contrasena" placeholder="Contraseña" ng-model="loginNewPassword">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="generarAlertaConf('cambiarContrasena')" data-toggle="modal" data-target="#AlertaConf">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div> 
+
+ 

@@ -23,6 +23,8 @@ namespace APIRetroalimentacion.Models
             this.rol = new HashSet<rol>();
         }
     
+        public int id { get; set; }
+        public string cedula { get; set; }
         public string correo_electronico { get; set; }
         public string contrasenna { get; set; }
         public string primer_nombre { get; set; }

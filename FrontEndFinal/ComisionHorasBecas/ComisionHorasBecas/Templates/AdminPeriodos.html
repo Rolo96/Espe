@@ -1,0 +1,271 @@
+﻿<!--Se incluye el menu lateral de la vista administrador-->
+<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<ng-include src="scpUrlFormsModals"></ng-include>
+
+<script>
+
+    function activar() {
+        document.getElementById("FechaInicioEvaluacion").disabled = false;
+        document.getElementById("FechaCierreEvaluacion").disabled = false;
+        document.getElementById("FechaTS").disabled = false;
+
+    }
+    function handle_form_submission() {
+        document.getElementById("FechaInicioEvaluacion").disabled = true;
+        document.getElementById("FechaCierreEvaluacion").disabled = true;
+        document.getElementById("FechaTS").disabled = true;
+    }
+
+</script>
+
+<!-------------------------------------------------------------------------- Menu Izquierda --------------------------------------------------------------------------->
+<div class="row">
+    <div class="col-md-4 mx-4">
+        <div class="container" align="center" style="width:430px; margin-bottom:-35px; margin-top:50px">
+            <button type="button" class="btn btn-primary btn-lg btn-block" ng-disabled="scpBtnSemestreActive" data-toggle="modal" data-target="#modalSemestre">{{scpBtnSemestre}}</button>
+        </div>
+        <div class="row justify-content-center my-5">
+            <form method="post" name="ConfigForm" ng-submit="submitForm()" novalidate onsubmit="return handle_form_submission()">
+                <h2> Configuración del semestre </h2>
+                <!-- Fecha y hora de Apertura-->
+                <div class="form-group ">
+                    <label>
+                        Fecha y hora de apertura para la evaluación del encargado
+                    </label>
+                    <input class="form-control" id="FechaInicioEvaluacion" type="date" disabled ng-model="fechasSemestre.FechaInicioEvaluacion" required />
+                </div>
+                <!-- Fecha y hora de cierre-->
+                <div class="form-group ">
+                    <label>
+                        Fecha y hora de cierre  para la evaluación del encargado
+                    </label>
+                    <input class="form-control" id="FechaCierreEvaluacion" type="date" disabled ng-model="fechasSemestre.FechaCierreEvaluacion" required />
+                </div>
+                <!-- Fecha de entrega a trabajo social-->
+                <div class="form-group ">
+                    <label>
+                        Fecha de entrega a trabajo social
+                    </label>
+                    <input class="form-control" id="FechaTS" type="date" disabled ng-model="fechasSemestre.FechaTrabajoSocial" required />
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4">
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" class="btn btn-primary" ng-disabled="ConfigForm.$invalid" data-dismiss="modal" data-toggle="modal" data-target="#AlertaConf" ng-click="modificarSemestre()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                        <input type="button" class="btn btn-primary" ng-disabled="!scpBtnSemestreActive" onClick="activar()" value="Editar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-------------------------------------------------------------------------- Menu DERECHA --------------------------------------------------------------------------->
+    <div class="col-md-5">
+        <div class="container" align="center" style="width:830px; margin-bottom:-35px; margin-top:50px">
+            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" ng-disabled="!scpBtnSemestreActive" data-target="#modalCreacion"> Crear un nuevo periodo</button>
+        </div>
+
+        <table class="table table-striped my-5">
+            <thead>
+                <tr><th colspan="4" style="text-align:center">Periodos de recepción</th></tr>
+                <tr>
+                    <th>Tipos de beca</th>
+                    <th>Fecha de apertura</th>
+                    <th colspan="3">Fecha de cierre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="periodo in scpPeriodos">
+                    <td>
+                        <p ng-repeat="beca in periodo.becas" style="display:inline">{{beca.AbreviaturaBeca}}<span style="display:inline" ng-show="{{$index}} <{{periodo.becas.length}}-1">,</span> </p>
+                    </td>
+                    <td>{{calculateTime(periodo.FechaApertura) | date: 'd MMMM  yyyy - HH:mm:ss'}}</td>
+                    <td>{{calculateTime(periodo.FechaCierre) | date: 'd MMMM  yyyy - HH:mm:ss'}}</td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Detalles">
+                            <i class=" fa fa-eye fa-lg" ng-click="VerPeriodo(periodo.Id)" id="DetEditText" data-target="#modalCreacion" data-toggle="modal" data-placement="bottom" title="Detalles"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Editar">
+                            <i class=" fa fa-edit fa-lg" ng-click="VerPeriodo(periodo.Id)"  data-target="#modalCreacion" data-toggle="modal" id="DetEditText"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalCreacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Crear periodo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="botoncerrar2">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+
+
+                <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form method="post" name="PeriodoForm" ng-submit="submitForm()" novalidate>
+                                    <!-- Fecha y hora de Apertura-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Fecha y hora de apertura
+                                        </label>
+                                        <input class="form-control" id="AperturaPeriodo" placeholder="MM/DD/YYYY" type="datetime-local" ng-model="periodo.FechaApertura" required />
+                                    </div>
+
+                                    <!-- Fecha y hora de cierre-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Fecha y hora de cierre
+                                        </label>
+                                        <input class="form-control" id="CierrePeriodo" placeholder="MM/DD/YYYY" type="datetime-local" ng-model="periodo.FechaCierre" required />
+                                    </div>
+
+                                    <!-- Cantidad de horas para HE -->
+                                    <div class="form-group ">
+                                        <input type="checkbox" name="HE_check" onclick="HE_number.disabled = !this.checked" />
+                                        <label>
+                                            Becas para Horas Estudiante (HE)
+                                        </label>
+                                        <input class="form-control" id="HE_number" name="HE_number" disabled="disabled" placeholder="Cantidad de horas para HE" type="number" ng-model="periodo.HE" />
+
+                                    </div>
+
+                                    <!-- Cantidad de horas para HA -->
+                                    <div class="form-group ">
+                                        <input type="checkbox" name="HA_check" onclick="HA_number.disabled = !this.checked" />
+                                        <label>
+                                            Becas para Horas Asistente (HA)
+                                        </label>
+                                        <input class="form-control" id="HA_number" name="HA_number" disabled="disabled" placeholder="Cantidad de horas para HA" type="number" ng-model="periodo.HA" />
+
+                                    </div>
+
+                                    <!-- Cantidad de horas para TU -->
+                                    <div class="form-group ">
+                                        <input type="checkbox" name="TU_check" onclick="TU_number.disabled = !this.checked" />
+                                        <label>
+                                            Becas para Tutoría Estudiantil (TU)
+                                        </label>
+                                        <input class="form-control" id="TU_number" name="TU_number" disabled="disabled" placeholder="Cantidad de horas para TU" type="number" ng-model="periodo.TU" />
+                                    </div>
+
+                                    <!-- Cantidad de horas para AE -->
+                                    <div class="form-group ">
+                                        <input type="checkbox" name="AE_check" onclick="AE_number.disabled = !this.checked" />
+                                        <label>
+                                            Becas para Asistencia Especial (AE)
+                                        </label>
+                                        <input class="form-control" id="AE_number" name="AE_number" disabled="disabled" placeholder="Cantidad de horas para AE" type="number" ng-model="periodo.AE" />
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" ng-disabled="PeriodoForm.$invalid" data-dismiss="modal" data-toggle="modal" data-target="#AlertaConf" ng-click="crearPeriodo()">Crear</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-------------------------------------------------------------------------- Modal semestre nuevo --------------------------------------------------------------------------->
+<div class="modal fade" id="modalSemestre" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Abrir semestre</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="bootstrap-iso">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form method="post" name="SemestreForm" ng-submit="submitForm()" novalidate>
+                                    <!-- Fecha y hora de Apertura-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Fecha de inicio del semestre
+                                        </label>
+                                        <input class="form-control" id="FechaInicio" name="AperturaSemestre" placeholder="MM/DD/YYYY" type="date" ng-model="semestre.Inicio" required />
+                                    </div>
+                                    <!-- Fecha y hora de cierre-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Fecha de cierre del semestre
+                                        </label>
+                                        <input class="form-control" id="FechaCierre" name="CierreSemestre" placeholder="MM/DD/YYYY" type="date" ng-model="semestre.Cierre" required />
+                                    </div>
+                                    <!-- Fecha de entrega a trabajo social-->
+                                    <div class="form-group ">
+                                        <label>
+                                            Año
+                                        </label>
+                                        <input class="form-control" id="Anio" name="Anio" type="number" min="2018" max="2100" value="2018" ng-model="semestre.Ano" required />
+                                    </div>
+                                    <!-- Fecha de entrega a trabajo social-->
+                                    <div class="form-row ">
+                                        <label>
+                                            Semestre
+                                        </label>
+                                        <div class="col">
+                                            <div class=" form-check">
+                                                <input ng-model="semestre.Semestre" class="form-check-input" type="radio" name="Semestre" id="" value=1 ng-checked="true">
+                                                <label class="form-check-label col-form-label-sm">I</label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class=" form-check">
+                                                <input ng-model="semestre.Semestre" class="form-check-input" type="radio" name="Semestre" id="" value=2>
+                                                <label class="form-check-label col-form-label-sm">II</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <button type="submit" class="btn btn-primary" ng-disabled="SemestreForm.$invalid" data-dismiss="modal" data-toggle="modal" data-target="#AlertaConf" ng-click="crearSemestre()">Crear</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

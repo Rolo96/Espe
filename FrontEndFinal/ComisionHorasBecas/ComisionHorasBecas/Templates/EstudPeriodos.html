@@ -1,0 +1,35 @@
+﻿<link href="css/estilos.css" rel="stylesheet" />
+<ng-include src="scpUrlBarraNavegacion"></ng-include>
+<!-------------------------------------------------------------------------- Tabla de periodos --------------------------------------------------------------------------->
+<div class="container-fluid justify-content-center" style="width:70%">
+    <table class="table table-striped">
+        <thead>
+            <tr><th colspan="4" id = "titulosTablas" style="text-align:center" text->Periodos de recepción </th></tr>
+            <tr>
+                <th>Tipos de beca</th>
+                <th>Fecha de apertura</th>
+                <th>Fecha de cierre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="periodo in periodos">
+                <td>
+                    <p ng-repeat="beca in periodo.becas" style="display:inline">{{beca.AbreviaturaBeca}}<span style="display:inline" ng-show="{{$index}} <{{periodo.becas.length}}-1">,</span> </p>
+                </td>
+                <td>{{calculateTime(periodo.FechaApertura) | date: 'd MMMM  yyyy - HH:mm'}}</td>
+                <td>{{calculateTime(periodo.FechaCierre) | date: 'd MMMM  yyyy - HH:mm'}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row justify-content-lg-start">
+        <p class="font-weight-bold" style="margin-right:3px; font-size:15px; color:black;">Simbología:</p>
+        <ul>
+            <li><p><br /><a class="font-weight-bold" style="color:#242424;">HE:</a> Beca horas estudiante</p></li>
+            <li><p><a class="font-weight-bold" style="color:#242424;">HA:</a> Beca horas asistente</p></li>
+            <li><p><a class="font-weight-bold" style="color:#242424;">TU:</a> Beca tutoría Estudiantil</p></li>
+            <li><p><a class="font-weight-bold" style="color:#242424;">AE:</a> Beca asistencia especial</p></li>
+        </ul>
+    </div>
+</div>
+
+<toast></toast>

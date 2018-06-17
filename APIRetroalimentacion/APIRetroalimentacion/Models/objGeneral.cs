@@ -9,5 +9,6 @@ namespace APIRetroalimentacion.Models
     {
         public string opcionStr { get; set; }
         public int opcionInt { get; set; }
+        public int opcionInt2 { get; set; }
     }
 }

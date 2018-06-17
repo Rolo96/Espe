@@ -26,7 +26,7 @@ namespace APIRetroalimentacion.Controllers
                             join e in entities.estudiantes on rxe.IdEstudiante equals e.carne
                             join s in entities.SOLICITUD on rxe.IdSolicitud equals s.Id
                             join se in entities.SEMESTRE on s.IdSemestre equals se.Id
-                            where rxe.IdResponsable == obj.opcionStr && se.Id==obj.opcionInt
+                            where rxe.IdResponsable == obj.opcionInt2 && se.Id==obj.opcionInt
                             select new
                             {
                                 Nombre = e.primer_nombre,

@@ -48,15 +48,15 @@ namespace APIRetroalimentacion.Models
         public virtual DbSet<TRANSACCIONES> TRANSACCIONES { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
     
-        public virtual int evaluarAsistente(string idEstudiante, string idResponsable, string observacion, Nullable<bool> recomendable, Nullable<int> horasLaboradas, Nullable<int> idSolicitud)
+        public virtual int evaluarAsistente(string idEstudiante, Nullable<int> idResponsable, string observacion, Nullable<bool> recomendable, Nullable<int> horasLaboradas, Nullable<int> idSolicitud)
         {
             var idEstudianteParameter = idEstudiante != null ?
                 new ObjectParameter("IdEstudiante", idEstudiante) :
                 new ObjectParameter("IdEstudiante", typeof(string));
     
-            var idResponsableParameter = idResponsable != null ?
+            var idResponsableParameter = idResponsable.HasValue ?
                 new ObjectParameter("IdResponsable", idResponsable) :
-                new ObjectParameter("IdResponsable", typeof(string));
+                new ObjectParameter("IdResponsable", typeof(int));
     
             var observacionParameter = observacion != null ?
                 new ObjectParameter("Observacion", observacion) :
@@ -77,11 +77,11 @@ namespace APIRetroalimentacion.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("evaluarAsistente", idEstudianteParameter, idResponsableParameter, observacionParameter, recomendableParameter, horasLaboradasParameter, idSolicitudParameter);
         }
     
-        public virtual int editarAsistente(Nullable<int> id, string observacion, Nullable<bool> recomendable, Nullable<int> horasLaboradas)
+        public virtual int editarAsistente(Nullable<int> idEvaluacion, string observacion, Nullable<bool> recomendable, Nullable<int> horasLaboradas)
         {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
+            var idEvaluacionParameter = idEvaluacion.HasValue ?
+                new ObjectParameter("IdEvaluacion", idEvaluacion) :
+                new ObjectParameter("IdEvaluacion", typeof(int));
     
             var observacionParameter = observacion != null ?
                 new ObjectParameter("Observacion", observacion) :
@@ -95,7 +95,7 @@ namespace APIRetroalimentacion.Models
                 new ObjectParameter("HorasLaboradas", horasLaboradas) :
                 new ObjectParameter("HorasLaboradas", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("editarAsistente", idParameter, observacionParameter, recomendableParameter, horasLaboradasParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("editarAsistente", idEvaluacionParameter, observacionParameter, recomendableParameter, horasLaboradasParameter);
         }
     }
 }

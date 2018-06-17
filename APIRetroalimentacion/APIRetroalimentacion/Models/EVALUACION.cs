@@ -19,7 +19,7 @@ namespace APIRetroalimentacion.Models
         public bool Recomendable { get; set; }
         public decimal HorasLaboradas { get; set; }
         public string IdEstudiante { get; set; }
-        public string IdResponsable { get; set; }
+        public int IdResponsable { get; set; }
         public int IdSolicitud { get; set; }
     
         public virtual estudiantes estudiantes { get; set; }

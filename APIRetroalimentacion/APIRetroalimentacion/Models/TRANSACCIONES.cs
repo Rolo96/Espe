@@ -15,7 +15,7 @@ namespace APIRetroalimentacion.Models
     public partial class TRANSACCIONES
     {
         public int Id { get; set; }
-        public string IdResponsable { get; set; }
+        public int IdResponsable { get; set; }
         public System.DateTime Fecha { get; set; }
         public int IdSolicitud { get; set; }
         public int IdEstado { get; set; }
