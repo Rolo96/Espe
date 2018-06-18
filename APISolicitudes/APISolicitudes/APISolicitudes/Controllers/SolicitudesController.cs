@@ -899,6 +899,11 @@ namespace APISolicitudes.Controllers
             }
         }
 
+        /// <summary>
+        /// Rechaza la cancelacion de una solicitud
+        /// </summary>
+        /// <param name="obj">objeto con el id de la solicitud</param>
+        /// <returns>ok si se ejecuta correctamente</returns>
         [HttpPost]
         [Route("rechazarCancelacion")]
         public HttpResponseMessage rechazarCancelacion(objGeneral obj)
@@ -911,6 +916,59 @@ namespace APISolicitudes.Controllers
                     {
                         entities.cambiarEstado(obj.opcionInt, 4);
                         return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
+                }
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+        }
+
+        /// <summary>
+        /// Inserta una transaccion
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("insertarTransaccion")]
+        public HttpResponseMessage insertarTransaccion(transaccion obj)
+        {
+            using (HorasBecaEntities entities = new HorasBecaEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        entities.insertarTransaccion(obj.opcionInt,DateTime.Now,obj.opcionInt2, obj.opcionInt3);
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    }
+                    catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
+                }
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+        }
+
+        /// <summary>
+        /// Consulta el correo de un estudiante
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("consultarCorreo")]
+        public HttpResponseMessage consultarCorreo(objGeneral obj)
+        {
+            using (HorasBecaEntities entities = new HorasBecaEntities())
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        var solicitud = (from e in entities.estudiantes.AsEnumerable()
+                                         where obj.opcionStr == e.carne
+                                         select new
+                                         {
+                                             e.correo_electronico
+                                         }).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.OK,solicitud);
                     }
                     catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
                 }

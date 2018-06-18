@@ -184,6 +184,7 @@
       <DependentUpon>HBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\objGeneral.cs" />
+    <Compile Include="Models\transaccion.cs" />
     <Compile Include="Models\objGeneral2.cs" />
     <Compile Include="Models\PERIODO.cs">
       <DependentUpon>HBModel.tt</DependentUpon>
