@@ -34,6 +34,7 @@
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Nota" Type="Int32" />
     <Property Name="NombreResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ScreenShotNota" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="SOLICITUD" Relationship="Self.FK_BECAHATU_SOLICITUD" FromRole="BECAHATU" ToRole="SOLICITUD" />
   </EntityType>
   <EntityType Name="BECAXPERIODO">
@@ -79,7 +80,7 @@
     <Property Name="carne" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="estudiantes" ToRole="EVALUACION" />
@@ -95,7 +96,7 @@
     <Property Name="Recomendable" Type="Boolean" Nullable="false" />
     <Property Name="HorasLaboradas" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdResponsable" Type="Int32" Nullable="false" />
     <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
     <NavigationProperty Name="estudiantes" Relationship="Self.FK_EVALUACION_IDESTUDIANTE" FromRole="EVALUACION" ToRole="estudiantes" />
     <NavigationProperty Name="usuario" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="EVALUACION" ToRole="usuario" />
@@ -132,7 +133,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FechaApertura" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="FechaCierre" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdAdministrador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdAdministrador" Type="Int32" Nullable="false" />
     <Property Name="IdSemestre" Type="Int32" Nullable="false" />
     <NavigationProperty Name="BECAXPERIODO" Relationship="Self.FK_BECAXPERIODO_PERIODO" FromRole="PERIODO" ToRole="BECAXPERIODO" />
     <NavigationProperty Name="SEMESTRE" Relationship="Self.FK_PERIODO_SEMESTRE" FromRole="PERIODO" ToRole="SEMESTRE" />
@@ -142,7 +143,7 @@
       <PropertyRef Name="IdResponsable" />
       <PropertyRef Name="IdEstudiante" />
     </Key>
-    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdResponsable" Type="Int32" Nullable="false" />
     <Property Name="IdEstudiante" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
     <NavigationProperty Name="estudiantes" Relationship="Self.FK_RESPONSABLEXESTUDIANTE_IDESTUDIANTE" FromRole="RESPONSABLEXESTUDIANTE" ToRole="estudiantes" />
@@ -238,7 +239,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdResponsable" Type="Int32" Nullable="false" />
     <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
     <Property Name="IdEstado" Type="Int32" Nullable="false" />
@@ -248,12 +249,14 @@
   </EntityType>
   <EntityType Name="usuario">
     <Key>
-      <PropertyRef Name="correo_electronico" />
+      <PropertyRef Name="id" />
     </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="correo_electronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="contrasenna" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="primer_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="segundo_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="primer_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="segundo_apellido" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="EVALUACION" Relationship="Self.FK_EVALUACION_IDRESPONSABLE" FromRole="usuario" ToRole="EVALUACION" />
@@ -422,7 +425,7 @@
     <End Role="EVALUACION" Type="Self.EVALUACION" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="usuario">
-        <PropertyRef Name="correo_electronico" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="EVALUACION">
         <PropertyRef Name="IdResponsable" />
@@ -458,7 +461,7 @@
     <End Role="RESPONSABLEXESTUDIANTE" Type="Self.RESPONSABLEXESTUDIANTE" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="usuario">
-        <PropertyRef Name="correo_electronico" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="RESPONSABLEXESTUDIANTE">
         <PropertyRef Name="IdResponsable" />
@@ -518,7 +521,7 @@
     <End Role="TRANSACCIONES" Type="Self.TRANSACCIONES" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="usuario">
-        <PropertyRef Name="correo_electronico" />
+        <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="TRANSACCIONES">
         <PropertyRef Name="IdResponsable" />
