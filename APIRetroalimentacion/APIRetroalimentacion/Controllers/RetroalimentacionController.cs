@@ -11,10 +11,14 @@ namespace APIRetroalimentacion.Controllers
 {
     public class RetroalimentacionController : ApiController
     {
-
+        /// <summary>
+        /// Solicita los estudaintes de un responsable
+        /// </summary>
+        /// <param name="obj">Objeto que lleva en opcionInt el semestre y en opcionInt2 el id del responsable</param>
+        /// <returns>lista de estudiantes</returns>
         [HttpPost]
         [Route("solicitarEstudiantes")]
-        public HttpResponseMessage AgregarSemestre(objGeneral obj)
+        public HttpResponseMessage solicitarEstudiantes(objGeneral obj)
         {
             using (HorasBecaEntities entities = new HorasBecaEntities())
             {
@@ -59,6 +63,11 @@ namespace APIRetroalimentacion.Controllers
             }
         }
 
+        /// <summary>
+        /// Realiza la evaluacion del trabajo de un estudiante
+        /// </summary>
+        /// <param name="evaluacion">informacion a registrar</param>
+        /// <returns>ok si guarda la evaluacion</returns>
         [HttpPost]
         [Route("evaluarEstudiante")]
         public HttpResponseMessage EvaluarEstudiante(EVALUACION evaluacion)
@@ -78,6 +87,11 @@ namespace APIRetroalimentacion.Controllers
             }
         }
 
+        /// <summary>
+        /// Realiza la edicion de una evaluacion
+        /// </summary>
+        /// <param name="evaluacion">informacion a editar</param>
+        /// <returns>ok si lo actualiza</returns>
         [HttpPost]
         [Route("editarEvaluarEstudiante")]
         public HttpResponseMessage EditarEvaluarEstudiante(EVALUACION evaluacion)
