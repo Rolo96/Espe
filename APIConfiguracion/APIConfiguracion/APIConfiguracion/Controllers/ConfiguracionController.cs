@@ -10,6 +10,12 @@ namespace APIConfiguracion.Controllers
 {
     public class ConfiguracionController : ApiController
     {
+
+        /// <summary>
+        /// Inserta un nuevo semestre
+        /// </summary>
+        /// <param name="semestre">informacion del semestre</param>
+        /// <returns>ok si lo agrega</returns>
         [HttpPost]
         [Route("agregarSemestre")]
         public HttpResponseMessage AgregarSemestre(SEMESTRE semestre)
@@ -20,7 +26,7 @@ namespace APIConfiguracion.Controllers
                 {
                     try
                     {
-                        entities.insertarSemestre(semestre.Semestre1, semestre.Ano, semestre.FechaInicio, semestre.FechaCierre);
+                        entities.insertarSemestre(semestre.Semestre1, semestre.FechaInicio.Year, semestre.FechaInicio, semestre.FechaCierre);
                         return Request.CreateResponse(HttpStatusCode.OK);
                     }
                     catch (DataException) { return Request.CreateResponse(HttpStatusCode.Conflict); }
@@ -29,6 +35,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Edita la informacion de un semestre (Fechas)
+        /// </summary>
+        /// <param name="semestre">informacion a editar</param>
+        /// <returns>ok si lo edita</returns>
         [HttpPost]
         [Route("editarSemestre")]
         public HttpResponseMessage EditarSemestre(SEMESTRE semestre)
@@ -47,6 +58,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Edita la informacion de un periodo
+        /// </summary>
+        /// <param name="periodo">informacion a editar</param>
+        /// <returns>ok si lo edita</returns>
         [HttpPost]
         [Route("editarPeriodo")]
         public HttpResponseMessage EditarPeriodo(PeriodoCompleto periodo)
@@ -66,6 +82,10 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Solicita todos los roles de la bd
+        /// </summary>
+        /// <returns>lista de roles</returns>
         [HttpGet]
         [Route("roles")]
         public HttpResponseMessage VerRoles()
@@ -91,6 +111,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene la informacion de un semestre
+        /// </summary>
+        /// <param name="obj">objeto con el id del semestre</param>
+        /// <returns>informacion del semestre</returns>
         [HttpPost]
         [Route("verFechasSemestre")]
         public HttpResponseMessage VerFechasSemestre(objGeneral obj)
@@ -117,6 +142,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene la informacion de un periodo
+        /// </summary>
+        /// <param name="obj">objeto que trae el id del periodo</param>
+        /// <returns>Informacion del periodo</returns>
         [HttpPost]
         [Route("verPeriodo")]
         public HttpResponseMessage VerPeriodo(objGeneral obj)
@@ -149,6 +179,10 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Verifica si hay un semestre en curso
+        /// </summary>
+        /// <returns>informacion del semestre en curso</returns>
         [HttpGet]
         [Route("haySemestre")]
         public HttpResponseMessage HaySemestre()
@@ -174,6 +208,10 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los usuarios del sistema
+        /// </summary>
+        /// <returns>lista de usuarios</returns>
         [HttpGet]
         [Route("usuarios")]
         public HttpResponseMessage usuarios()
@@ -202,6 +240,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene todos los peridos de un semestre
+        /// </summary>
+        /// <param name="obj">objeto que trae el id del semestre</param>
+        /// <returns>lista de periodos</returns>
         [HttpPost]
         [Route("verPeriodos")]
         public HttpResponseMessage VerPeriodos(objGeneral obj)
@@ -235,6 +278,11 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// inserta un nuevo periodo
+        /// </summary>
+        /// <param name="periodo">informacion del periodo a agregar</param>
+        /// <returns>ok si lo agrega</returns>
         [HttpPost]
         [Route("agregarPeriodo")]
         public HttpResponseMessage AgregarPeriodo(PeriodoCompleto periodo)
@@ -254,6 +302,10 @@ namespace APIConfiguracion.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtiene los tipos de beca habilitados por los periodos abiertos
+        /// </summary>
+        /// <returns>lista de tipos de beca hablitados</returns>
         [HttpGet]
         [Route("semestreBecas")]
         public HttpResponseMessage SemestreBecas()
